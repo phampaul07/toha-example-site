@@ -1,11 +1,5 @@
 {
-<<<<<<< HEAD
   "buildCommand": "npm install && hugo --minify",
   "outputDirectory": "public",
   "installCommand": "npm install"
-=======
-  "buildCommand": "cd toha-example-site && npm install && hugo --minify",
-  "outputDirectory": "toha-example-site/public",
-  "installCommand": "cd toha-example-site && npm install"
->>>>>>> a12b804c0d275ce35451c68ae8879d3c22966a01
 }
