@@ -1,0 +1,292 @@
+{{ define "sidebar" }}{{ end }}
+{{ define "toc" }}{{ end }}
+
+{{ define "navbar" }}
+{{ partial "navigators/navbar.html" . }}
+<script>
+  (function() {
+    var nav = document.getElementById('top-navbar');
+    if (nav) {
+      nav.classList.add('transparent-navbar', 'homepage');
+    }
+  })();
+</script>
+{{ end }}
+
+{{ define "content" }}
+<style>
+
+  .transparent-navbar #navbar-clock {
+  color: #ffffff !important;
+}
+.top-navbar:not(.transparent-navbar) #navbar-clock {
+  color: #000 !important;
+}
+
+  .container-fluid.bg-secondary.wrapper {
+  display: block !important;
+}
+#content-section {
+  display: block !important;
+  width: 100% !important;
+}
+#content-section .content {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  flex: unset !important;
+}
+  #content-section,
+  #content-section .content {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .me-hero {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    background: url('/images/site/background.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  .me-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+  }
+  .me-hero h1 {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+  .me-bio {
+    max-width: 860px;
+    margin: 3.5rem auto 3rem;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: center;
+  }
+  .me-bio-text p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin-bottom: 1rem;
+  }
+  .me-resume-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.65rem 1.8rem;
+    background: #1a1a2e;
+    color: #fff !important;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.07em;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .me-resume-btn:hover { background: #16213e; }
+  .me-bio-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+  .me-divider {
+    max-width: 860px;
+    margin: 0 auto 2.5rem;
+    border: none;
+    border-top: 1px solid rgba(128,128,128,0.2);
+  }
+  .me-interests {
+    max-width: 860px;
+    margin: 0 auto 5rem;
+    padding: 0 1.5rem;
+  }
+  .me-interests-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 1.2rem;
+  }
+  .interest-grid {
+    border: 1px solid rgba(128,128,128,0.25);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .interest-cards-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+.interest-card {
+    padding: 2rem 0.5rem; /* Also even out the padding so it's perfectly centered */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* ADD THIS */
+    gap: 0.6rem;
+    border-right: 1px solid rgba(128,128,128,0.2);
+    cursor: default;
+    transition: background 0.18s;
+    min-height: 160px;
+    user-select: none;
+  }
+  .interest-card:last-child { border-right: none; }
+  .interest-card:hover,
+  .interest-card.active { background: rgba(128,128,128,0.1); }
+  .interest-icon { font-size: 2rem; line-height: 1; }
+  .interest-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    opacity: 0.65;
+  }
+  .interest-detail {
+    display: none;
+    padding: 1.5rem 1.8rem;
+    background: rgba(128,128,128,0.07);
+    border-top: 1px solid rgba(128,128,128,0.2);
+    animation: fadeUp 0.18s ease;
+  }
+  .interest-detail.active { display: block; }
+  .interest-detail h3 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 0.6rem;
+  }
+  .interest-detail p {
+    font-size: 0.93rem;
+    line-height: 1.75;
+    margin: 0;
+    opacity: 0.85;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (max-width: 680px) {
+    .me-bio { grid-template-columns: 1fr; }
+    .me-bio-image { max-width: 240px; margin: 0 auto; display: block; }
+  }
+</style>
+
+<div class="me-hero">
+  <h1>About Me</h1>
+</div>
+
+<div class="me-bio">
+  <div class="me-bio-text">
+    <p>Hey, I'm Paul — an electrical engineering student at Washington University in St. Louis with a thing for building stuff that actually works. I spend a lot of my time at Arch Reactor, a local makerspace, hacking on embedded systems, robotic arms, and whatever project has my attention that week.</p>
+    <p>Outside the lab I'm usually watching something, listening to something, or outside doing something. I like staying curious — whether that's in engineering or everything else.</p>
+    <a class="me-resume-btn" href="/files/resume.pdf" target="_blank">My Resume</a>
+  </div>
+  <img class="me-bio-image" src="/images/author/paul.jpg" alt="Paul Pham">
+</div>
+
+<hr class="me-divider">
+
+<div class="me-interests">
+  <p class="me-interests-title">Interests</p>
+  <div class="interest-grid">
+    <div class="interest-cards-row">
+      <div class="interest-card" data-target="fishing">
+        <span class="interest-icon">🎣</span>
+        <span class="interest-label">Fishing</span>
+      </div>
+      <div class="interest-card" data-target="badminton">
+        <span class="interest-icon">🏸</span>
+        <span class="interest-label">Badmintoffn</span>
+      </div>
+      <div class="interest-card" data-target="music">
+        <span class="interest-icon">🎵</span>
+        <span class="interest-label">Music</span>
+      </div>
+      <div class="interest-card" data-target="film">
+        <span class="interest-icon">🎬</span>
+        <span class="interest-label">Film</span>
+      </div>
+      <div class="interest-card" data-target="manga">
+        <span class="interest-icon">📖</span>
+        <span class="interest-label">Manga</span>
+      </div>
+    </div>
+    <div class="interest-detail" id="detail-fishing">
+      <h3>🎣 Fishing</h3>
+      <p>One of the few things that forces me to slow down. There's something satisfying about the patience it takes — good reset from staring at code all day.</p>
+    </div>
+    <div class="interest-detail" id="detail-badminton">
+      <h3>🏸 Badminton</h3>
+      <p>Fast, technical, and way more athletic than people give it credit for. Great way to stay competitive without needing a whole team.</p>
+    </div>
+    <div class="interest-detail" id="detail-music">
+      <h3>🎵 Music</h3>
+      <p>Always on in the background. Music is a big part of how I move through the day — whether I'm studying, building, or just commuting.</p>
+    </div>
+    <div class="interest-detail" id="detail-film">
+      <h3>🎬 Film &amp; TV &amp; Anime</h3>
+      <p>I watch a lot — movies, TV, anime, all of it. I'm drawn to good writing and interesting worlds. Anything that makes you think or feel something is worth the time.</p>
+    </div>
+    <div class="interest-detail" id="detail-manga">
+      <h3>📖 Manga</h3>
+      <p>Manga tells stories in a way nothing else quite does. The art direction and pacing can be incredible when it's done well. Always have something in the reading queue.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var cards = document.querySelectorAll('.interest-card');
+    var details = document.querySelectorAll('.interest-detail');
+    var activeId = null;
+    var leaveTimer = null;
+    function showDetail(id) {
+      details.forEach(function(d) { d.classList.remove('active'); });
+      cards.forEach(function(c) { c.classList.remove('active'); });
+      var detail = document.getElementById('detail-' + id);
+      if (detail) detail.classList.add('active');
+      var card = document.querySelector('[data-target="' + id + '"]');
+      if (card) card.classList.add('active');
+      activeId = id;
+    }
+    function hideAll() {
+      details.forEach(function(d) { d.classList.remove('active'); });
+      cards.forEach(function(c) { c.classList.remove('active'); });
+      activeId = null;
+    }
+    cards.forEach(function(card) {
+      card.addEventListener('mouseenter', function() {
+        clearTimeout(leaveTimer);
+        showDetail(card.getAttribute('data-target'));
+      });
+      card.addEventListener('mouseleave', function() {
+        leaveTimer = setTimeout(hideAll, 200);
+      });
+    });
+    details.forEach(function(detail) {
+      detail.addEventListener('mouseenter', function() { clearTimeout(leaveTimer); });
+      detail.addEventListener('mouseleave', function() { leaveTimer = setTimeout(hideAll, 200); });
+    });
+  })();
+</script>
+{{ end }}
