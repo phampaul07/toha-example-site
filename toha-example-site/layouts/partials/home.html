@@ -1,0 +1,117 @@
+{{ $author := (index site.Data site.Language.Lang).author }}
+<style>
+  #home.custom-hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: url('/images/site/background.jpg') center/cover no-repeat;
+    overflow: hidden;
+  }
+
+  #home.custom-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+  }
+
+  /* NO MORE CLIPPING: Iframe is full screen, physics runs everywhere */
+.hero-iframe-container {
+    position: absolute;
+    top: -100;
+    left: 0 ;
+    width: 250vw;
+    height: 100svh;
+    z-index: 1;
+    transform: translateX(-10%);
+    /* CHANGE 1: Remove the transform line entirely (if you didn't already) */
+    
+    /* CHANGE 2: Make the mask much wider or remove it entirely */
+    /* This makes the "barrier" invisible by starting the fade-out much further out */
+    mask-image: linear-gradient(to right, 
+        transparent 5%, 
+        black 20%, 
+        black 80%, 
+        transparent 95%);
+    -webkit-mask-image: linear-gradient(to left, 
+        transparent 5%, 
+        black 20%, 
+        black 80%, 
+        transparent 95%);
+  }
+  .hero-iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* TEXT OVERLAY: Centered and sized like your example */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    pointer-events: none;
+  }
+  
+  .hero-right-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligns picture and text to center */
+    color: white !important;
+    padding-left: 15%; /* Gently shifts the whole center block to the right */
+  }
+  
+  .hero-right-content img {
+    width: 130px; /* Slightly smaller to match example */
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-right-content h1 {
+    font-size: 2.5rem; /* Smaller, cleaner size */
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: white !important;
+  }
+  
+  .hero-right-content .typing-container {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 0.9;
+    color: white !important;
+  }
+</style>
+
+<div id="home" class="custom-hero">
+  <div class="hero-iframe-container">
+    <iframe 
+      src="https://heartfelt-pie-342355.netlify.app/" 
+      title="3D Lanyard Interaction"
+      scrolling="no" 
+      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+    ></iframe>
+  </div>
+
+  <div class="hero-overlay">
+    <div class="hero-right-content">
+      <img src="{{ $author.image | relURL }}" alt="{{ $author.nickname }}">
+      <h1>{{ $author.greeting }}{{ $author.nickname }}</h1>
+      <div class="typing-container">
+        <span id="typeit"></span>
+      </div>
+      <ul id="typing-carousel-data" style="display: none;">
+        {{ range $author.summary }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</div>

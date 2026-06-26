@@ -1,0 +1,48 @@
+{{ $author := site.Data.author }}
+{{ $about := (index site.Data site.Language.Lang).sections.about }}
+
+<div class="container-fluid anchor pb-5 about-section" id="{{ $about.section.id }}">
+  <div class="container">
+    <div class="row pt-5">
+      <div class="col-sm-12 col-md-6 col-lg-8">
+        <!-- Replaced variable with hardcoded name so it shows up -->
+        <h1 class="text-center text-md-start">Paul Pham</h1>
+        <h5 class="text-center text-md-start mb-3">
+          {{ $about.designation }} {{ i18n "at" }}
+          <a href="{{ $about.company.url }}" target="_blank" rel="noopener noreferrer">{{ $about.company.name }}</a>
+        </h5>
+        
+        <p class="text-center text-md-start">{{ $about.summary | markdownify }}</p>
+
+        <div class="text-center text-md-start mt-4 mb-4">
+          <ul class="list-unstyled list-inline">
+            {{ range $about.socialLinks }}
+            <li class="list-inline-item me-3">
+              <!-- Added 'text-dark' class to make icons dark -->
+              <a href="{{ .url }}" class="text-dark" target="_blank" rel="noopener noreferrer" aria-label="{{ .name }}">
+                <i class="{{ .icon }} fa-2x" aria-hidden="true"></i>
+              </a>
+            </li>
+            {{ end }}
+          </ul>
+        </div>
+        
+        <div class="text-center text-md-start mt-4">
+          {{ range $about.resourceLinks }}
+          <!-- Changed 'btn-primary' to 'btn-dark' -->
+          <a class="btn btn-dark me-2 mb-2" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .title }}</a>
+          {{ end }}
+        </div>
+      </div>
+      
+      <div class="col-sm-12 col-md-6 col-lg-4 pt-4 pt-md-0 d-flex justify-content-center align-items-center">
+        {{ if $about.profileImage }}
+          {{ $profileImg := resources.Get $about.profileImage }}
+          {{ if $profileImg }}
+            <img src="{{ $profileImg.RelPermalink }}" alt="Profile Image" class="img-fluid rounded shadow" style="max-width: 100%; height: auto;">
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
