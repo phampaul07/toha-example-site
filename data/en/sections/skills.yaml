@@ -49,6 +49,10 @@ skills:
   summary: "Experienced in digital logic design, mapping hardware architectures, and exploring microprocessor foundations using the open RISC-V ISA on field-programmable arrays."
   categories: ["Hardware", "All"]
 
+- name: CircuitPython
+  summary: "Leveraged for low-overhead hardware scripting on bare-metal microcontrollers, enabling rapid deployment of embedded software, direct GPIO pin manipulation, and sensor integration."
+  categories: ["Hardware"]
+
 - name: Raspberry Pi & ESP32
   logo: /images/sections/skills/raspberry-pi.png
   summary: "Prototyped embedded applications using Linux-based single-board computers and microcontrollers to manage hardware interrupts, Wi-Fi modules, and sensor arrays."
@@ -81,3 +85,8 @@ skills:
   logo: /images/sections/skills/cad.png
   summary: "Familiar with modeling 3D parts and physical component assemblies to map structural spatial constraints before moving to physical manufacturing."
   categories: ["Tools", "All"]
+
+- name: Visual Studio Code
+  logo: /images/sections/skills/vscode.webp
+  summary: "Utilized as the primary Integrated Development Environment (IDE) for Python and C/C++ script development, version control integration, and embedded hardware flashing."
+  categories: ["Tools"]

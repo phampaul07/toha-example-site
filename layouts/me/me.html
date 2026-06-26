@@ -197,11 +197,12 @@
 
 <div class="me-bio">
   <div class="me-bio-text">
-    <p>Hey, I'm Paul — an electrical engineering student at Washington University in St. Louis with a thing for building stuff that actually works. I spend a lot of my time at Arch Reactor, a local makerspace, hacking on embedded systems, robotic arms, and whatever project has my attention that week.</p>
-    <p>Outside the lab I'm usually watching something, listening to something, or outside doing something. I like staying curious — whether that's in engineering or everything else.</p>
+    <p>Hello! I'm Paul—a first-generation Vietnamese American studying electrical engineering at Washington University in St. Louis. I've always had a spark for building things, whether it's snapping together Legos and Gundams for the aesthetics or designing electrical engineering projects to automate the mundane tasks of everyday life.</p>
+    <p>Outside of engineering, I'm always looking to expand my horizons. I love trying street food from different cultures, discovering new music, and staying active outdoors. Ultimately, I just like staying curious—whether that's in engineering or everything else. </p>
     <a class="me-resume-btn" href="/files/resume.pdf" target="_blank">My Resume</a>
   </div>
-  <img class="me-bio-image" src="/images/author/paul.jpg" alt="Paul Pham">
+  {{ $bioImage := resources.Get "images/author/fihsing.JPG" }}
+  <img class="me-bio-image" src="{{ $bioImage.RelPermalink }}" alt="Paul Pham">
 </div>
 
 <hr class="me-divider">
@@ -216,7 +217,7 @@
       </div>
       <div class="interest-card" data-target="badminton">
         <span class="interest-icon">🏸</span>
-        <span class="interest-label">Badmintoffn</span>
+        <span class="interest-label">Badminton</span>
       </div>
       <div class="interest-card" data-target="music">
         <span class="interest-icon">🎵</span>
@@ -228,28 +229,41 @@
       </div>
       <div class="interest-card" data-target="manga">
         <span class="interest-icon">📖</span>
-        <span class="interest-label">Manga</span>
+        <span class="interest-label">Reading</span>
       </div>
     </div>
     <div class="interest-detail" id="detail-fishing">
       <h3>🎣 Fishing</h3>
-      <p>One of the few things that forces me to slow down. There's something satisfying about the patience it takes — good reset from staring at code all day.</p>
+      <p>A recent hobby of mine, fishing has become a way to slow down my fast-paced everyday life, giving me a new found appreciation of the beauty of nature around me.</p>
+      <p> > Favorite fish to catch: Bass 🐟 </p>
+      <p> > Favorite bait: Wacky rigged Senko worms! 🪱 </p>
     </div>
     <div class="interest-detail" id="detail-badminton">
       <h3>🏸 Badminton</h3>
-      <p>Fast, technical, and way more athletic than people give it credit for. Great way to stay competitive without needing a whole team.</p>
+      <p>I enjoy the precise, competative, fast nature badminton! For me, badminton is a great way to relieve any stress I have and to train my accuracy. </p>
+      <p> > I love playing double matches with my friends after our classes are over </p>
+      <p> > I'm currently in the WashU badminton club as well! </p>
     </div>
     <div class="interest-detail" id="detail-music">
       <h3>🎵 Music</h3>
-      <p>Always on in the background. Music is a big part of how I move through the day — whether I'm studying, building, or just commuting.</p>
+      <p>Always on in the background. Music is a big part of how I move through the day — whether I'm studying, building, or just commuting. My music taste is always evolving!</p>
+      <p> > My favorite genres include shoegaze, R&B, and rage rap  </p>
+      <p> > Some of my favorite artists at the moment are Daniel Caesar, Osamason, Whirr, and Lamp!  </p>
     </div>
     <div class="interest-detail" id="detail-film">
-      <h3>🎬 Film &amp; TV &amp; Anime</h3>
-      <p>I watch a lot — movies, TV, anime, all of it. I'm drawn to good writing and interesting worlds. Anything that makes you think or feel something is worth the time.</p>
+      <h3>🎬 Film & Media</h3>
+      <p>I love to consume meaningful media, whether it's movies, TV, or anime. I love the abstraction and storytelling media can provide, while also showcasing masterful cinematography and action sequences. Anything that makes me think or feel something is worth the time.</p>
+      <p> > Favorite genres: Action and psychological thrillers 🧠 </p>
+      <p> > Favorite movies: Rango 🤠🦎 and Parasite </p>
+      <p> > Favorite TV shows: Severance and Beef 🥩</p>
+      <p> > Favorite animes: JoJo's Bizarre Adventure ⭐ and One Piece 🏴‍☠️</p>
+      <p>I love analyzing the cinematography and world-building in everything I watch! 🎞️ </p>
     </div>
     <div class="interest-detail" id="detail-manga">
-      <h3>📖 Manga</h3>
-      <p>Manga tells stories in a way nothing else quite does. The art direction and pacing can be incredible when it's done well. Always have something in the reading queue.</p>
+      <h3>📖 Reading</h3>
+      <p>Reading gives me the freedom for my imagination to flourish, offering a quiet escape from a fast-paced day. Whether it's deep diving into a new world or learning a new perspective, I find it to be the perfect way to unwind.</p>
+      <p> > Favorite genres: Sci-fi and fantasy </p>
+      <p> > Currently reading: <i>JJBA Series </p>
     </div>
   </div>
 </div>
