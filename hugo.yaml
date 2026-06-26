@@ -1,8 +1,8 @@
 # ⚠️ If hosting under a repo path, use full URL (e.g. https://<github_username>.github.io/<repo_name>) or images won’t display correctly
 baseURL: https://toha-preview.hugo-themes.com
 
-locale: bn
-title: "John's Blog"
+locale: en
+title: "Paul Pham"
 
 # Use Hugo modules to add theme
 module:
@@ -24,7 +24,7 @@ languages:
   en:
     locale: en
     label: English
-    title: "John's Blog"
+    title: "Paul Pham"
     weight: 1
   bn:
     locale: bn
@@ -65,8 +65,8 @@ params:
   # Provide logos for your site. The inverted logo will be used in the initial
   # transparent navbar and the main logo will be used in the non-transparent navbar.
   logo:
-    main: /images/site/main-logo.png
-    inverted: /images/site/inverted-logo.png
+    main: /images/site/pp_light.webp
+    inverted: /images/site/pp_dark.webp
     favicon: /images/site/favicon.png
 
   # GitHub repo of your site
