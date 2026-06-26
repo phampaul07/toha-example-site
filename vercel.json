@@ -1,5 +1,5 @@
 {
-  "buildCommand": "curl -L https://go.dev/dl/go1.22.0.linux-amd64.tar.gz -o go.tar.gz && tar -xzf go.tar.gz && export PATH=$PATH:$(pwd)/go/bin && curl -L https://github.com/gohugoio/hugo/releases/download/v0.147.9/hugo_extended_0.147.9_linux-amd64.tar.gz -o hugo.tar.gz && tar -xzf hugo.tar.gz && npm install && cd toha-example-site && npm install && cd .. && PATH=$PATH:$(pwd)/go/bin ./hugo --minify --source toha-example-site",
+  "buildCommand": "bash build.sh",
   "outputDirectory": "toha-example-site/public",
-  "installCommand": "echo 'skip'"
+  "installCommand": "echo skip"
 }
