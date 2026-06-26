@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd toha-example-site && npm install && hugo --minify",
+  "outputDirectory": "toha-example-site/public",
+  "installCommand": "cd toha-example-site && npm install"
+}
