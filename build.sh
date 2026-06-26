@@ -5,7 +5,5 @@ tar -xzf go.tar.gz
 export PATH=$PATH:$(pwd)/go/bin
 curl -L https://github.com/gohugoio/hugo/releases/download/v0.147.9/hugo_extended_0.147.9_linux-amd64.tar.gz -o hugo.tar.gz
 tar -xzf hugo.tar.gz
-cd toha-example-site
 npm install
-cd ..
-PATH=$PATH:$(pwd)/go/bin ./hugo --minify --source toha-example-site
+PATH=$PATH:$(pwd)/go/bin ./hugo --minify
