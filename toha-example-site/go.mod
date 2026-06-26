@@ -1,6 +1,6 @@
 module github.com/hugo-themes/toha-example-site
 
-go 1.25
+go 1.22
 
 // replace(
 //     github.com/hugo-toha/toha/v4 => ../toha
