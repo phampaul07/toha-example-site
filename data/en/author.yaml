@@ -1,15 +1,15 @@
 # some information about you
 name: "Paul Pham"
-nickname: "Paul"
+nickname: "Paul!"
 # greeting message before your name. it will default to "Hi! I am" if not provided
-greeting: "Hi, I am"
+greeting: "Hi! I am " 
 image: "images/author/headshot.jpeg"
 # give your some contact information. they will be used in the footer
 contactInfo:
   email: "phampp07@gmail.com"
   phone: "+314-397-5395"
   github: phampaul07
-  linkedin: paul-pham
+  linkedin: paul-pham07
 
 # some summary about what you do
 summary:
