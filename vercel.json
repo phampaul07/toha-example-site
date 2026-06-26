@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm install && curl -L https://github.com/gohugoio/hugo/releases/download/v0.147.9/hugo_extended_0.147.9_linux-amd64.tar.gz -o hugo.tar.gz && tar -xzf hugo.tar.gz && ./hugo --minify",
-  "outputDirectory": "public",
-  "installCommand": "npm install"
+  "buildCommand": "npm install && curl -L https://github.com/gohugoio/hugo/releases/download/v0.147.9/hugo_extended_0.147.9_linux-amd64.tar.gz -o hugo.tar.gz && tar -xzf hugo.tar.gz && ./hugo --minify --source toha-example-site",
+  "outputDirectory": "toha-example-site/public",
+  "installCommand": "npm install && cd toha-example-site && npm install"
 }
