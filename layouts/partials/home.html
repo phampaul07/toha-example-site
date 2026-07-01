@@ -1,117 +1,125 @@
 {{ $author := (index site.Data site.Language.Lang).author }}
 <style>
+  /* Import a sleek, modern font with ultra-thin options */
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400&display=swap');
+
   #home.custom-hero {
     position: relative;
-    min-height: 100vh;
+    height: 100vh;
     width: 100%;
-    background: url('/images/site/background.jpg') center/cover no-repeat;
+    background-color: #0a0a0a; /* Deep dark background */
     overflow: hidden;
+    font-family: 'Outfit', sans-serif;
   }
 
-  #home.custom-hero::after {
-    content: '';
+  /* Placeholder for your future 3D Particle Wave */
+  #canvas-container {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 0;
-  }
-
-  /* NO MORE CLIPPING: Iframe is full screen, physics runs everywhere */
-.hero-iframe-container {
-    position: absolute;
-    top: -100;
-    left: 0 ;
-    width: 250vw;
-    height: 100svh;
     z-index: 1;
-    transform: translateX(-10%);
-    /* CHANGE 1: Remove the transform line entirely (if you didn't already) */
-    
-    /* CHANGE 2: Make the mask much wider or remove it entirely */
-    /* This makes the "barrier" invisible by starting the fade-out much further out */
-    mask-image: linear-gradient(to right, 
-        transparent 5%, 
-        black 20%, 
-        black 80%, 
-        transparent 95%);
-    -webkit-mask-image: linear-gradient(to left, 
-        transparent 5%, 
-        black 20%, 
-        black 80%, 
-        transparent 95%);
-  }
-  .hero-iframe-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
   }
 
-  /* TEXT OVERLAY: Centered and sized like your example */
+  /* TEXT OVERLAY: Perfectly centered */
   .hero-overlay {
     position: absolute;
     inset: 0;
     z-index: 2;
     display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center;     /* Centers vertically */
-    pointer-events: none;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; 
   }
   
-  .hero-right-content {
+  .hero-content {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Aligns picture and text to center */
+    align-items: center;
     color: white !important;
-    padding-left: 15%; /* Gently shifts the whole center block to the right */
+    pointer-events: auto; 
   }
-  
-  .hero-right-content img {
-    width: 130px; /* Slightly smaller to match example */
-    height: 130px;
+
+  /* Avatar Restored & Styled */
+  .hero-avatar {
+    width: 120px; 
+    height: 120px;
     object-fit: cover;
     border-radius: 50%;
-    border: 3px solid white;
-    margin-bottom: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Sleek, semi-transparent border */
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); /* Soft drop shadow */
   }
   
-  .hero-right-content h1 {
-    font-size: 2.5rem; /* Smaller, cleaner size */
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+  /* The massive, thin "Jaxon-style" Name */
+  .hero-content h1 {
+    font-size: 5rem;
+    font-weight: 100; 
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
     color: white !important;
+    line-height: 1;
   }
-  
-  .hero-right-content .typing-container {
-    font-size: 1rem;
+
+  /* Navigation Links below the name */
+  .hero-links {
+    display: flex;
+    gap: 2.5rem; 
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .hero-links a {
+    color: white !important;
+    text-decoration: none;
+    font-size: 1.2rem;
     font-weight: 300;
-    opacity: 0.9;
-    color: white !important;
+    position: relative;
+    padding-bottom: 4px;
+    transition: opacity 0.3s ease;
+  }
+
+  .hero-links a:hover {
+    opacity: 0.7;
+  }
+
+  /* The elegant underline hover effect */
+  .hero-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease;
+  }
+
+  .hero-links a:hover::after {
+    width: 100%;
   }
 </style>
 
 <div id="home" class="custom-hero">
-  <div class="hero-iframe-container">
-    <iframe 
-      src="https://heartfelt-pie-342355.netlify.app/" 
-      title="3D Lanyard Interaction"
-      scrolling="no" 
-      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-    ></iframe>
-  </div>
+  <!-- The particle wave will eventually go here -->
+  <div id="canvas-container"></div>
 
   <div class="hero-overlay">
-    <div class="hero-right-content">
-      <img src="{{ $author.image | relURL }}" alt="{{ $author.nickname }}">
-      <h1>{{ $author.greeting }}{{ $author.nickname }}</h1>
-      <div class="typing-container">
-        <span id="typeit"></span>
-      </div>
-      <ul id="typing-carousel-data" style="display: none;">
-        {{ range $author.summary }}
-          <li>{{ . }}</li>
-        {{ end }}
+    <div class="hero-content">
+      
+      <!-- Profile Picture -->
+      <img class="hero-avatar" src="{{ $author.image | relURL }}" alt="{{ $author.nickname }}">
+
+      <!-- Big Name -->
+      <h1>{{ $author.name | default "Paul Pham" }}</h1>
+      
+      <!-- Minimalist Navigation Menu -->
+      <ul class="hero-links">
+        <li><a href="#about">Me</a></li>
+        <li><a href="#experience">Path</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#blog">Blog</a></li>
       </ul>
+
     </div>
   </div>
 </div>
