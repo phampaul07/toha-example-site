@@ -1,59 +1,57 @@
 {{/*  variables for enabling/disabling various features  */}}
-{{ $blogEnabled   := site.Params.features.blog.enable   | default false }}
-{{ $blogTitle  := site.Params.features.blog.title | default (i18n "posts") }}
-{{ $notesEnabled  := site.Params.features.notes.enable  | default false }}
-{{ $notesTitle := site.Params.features.notes.title  | default (i18n "notes") }}
-{{ $maxVisibleSections   := site.Params.topNavbar.maxVisibleSections   | default 5 }}
+{{ $blogEnabled := site.Params.features.blog.enable | default false }}
+{{ $blogTitle := site.Params.features.blog.title | default (i18n "posts") }}
+{{ $notesEnabled := site.Params.features.notes.enable | default false }}
+{{ $notesTitle := site.Params.features.notes.title | default (i18n "notes") }}
 
-{{/*  keep backward compatibility for blog post  */}}
 {{ if site.Params.enableBlogPost }}
   {{ $blogEnabled = true }}
 {{ end }}
 
-{{/* by default, don't use any logo */}}
+{{/* Logos */}}
 {{ $mainLogo := "" }}
 {{ $invertedLogo := "" }}
 {{ $darkLogo := "" }}
 
-{{/*  if custom logo has been provided, use them  */}}
 {{ if site.Params.logo.main }}
   {{ $mainLogo = site.Params.logo.main }}
 {{ end }}
+
 {{ if site.Params.logo.inverted }}
   {{ $invertedLogo = site.Params.logo.inverted }}
 {{ end }}
+
 {{ if site.Params.logo.dark }}
   {{ $darkLogo = site.Params.logo.dark }}
 {{ end }}
 
-{{/* resize the logos. don't resize svg because it is not supported */}}
 {{ if $mainLogo }}
-  {{ $mainLogo = resources.Get $mainLogo}}
+  {{ $mainLogo = resources.Get $mainLogo }}
   {{ if and $mainLogo (not (or (eq $mainLogo.MediaType.SubType "svg") (eq $mainLogo.MediaType.SubType "gif"))) }}
     {{ $mainLogo = $mainLogo.Resize "42x" }}
   {{ end }}
-  {{ $mainLogo = $mainLogo.RelPermalink}}
+  {{ $mainLogo = $mainLogo.RelPermalink }}
 {{ end }}
 
 {{ if $invertedLogo }}
-  {{ $invertedLogo = resources.Get $invertedLogo}}
+  {{ $invertedLogo = resources.Get $invertedLogo }}
   {{ if and $invertedLogo (not (or (eq $invertedLogo.MediaType.SubType "svg") (eq $invertedLogo.MediaType.SubType "gif"))) }}
     {{ $invertedLogo = $invertedLogo.Resize "42x" }}
   {{ end }}
-  {{ $invertedLogo = $invertedLogo.RelPermalink}}
+  {{ $invertedLogo = $invertedLogo.RelPermalink }}
 {{ end }}
 
 {{ if $darkLogo }}
-  {{ $darkLogo = resources.Get $darkLogo}}
+  {{ $darkLogo = resources.Get $darkLogo }}
   {{ if and $darkLogo (not (or (eq $darkLogo.MediaType.SubType "svg") (eq $darkLogo.MediaType.SubType "gif"))) }}
     {{ $darkLogo = $darkLogo.Resize "42x" }}
   {{ end }}
-  {{ $darkLogo = $darkLogo.RelPermalink}}
+  {{ $darkLogo = $darkLogo.RelPermalink }}
 {{ end }}
 
-{{ $logo := $mainLogo }}
-{{ if .IsHome }}
-  {{ $logo = $invertedLogo }}
+{{ $logo := $invertedLogo }}
+{{ if not $logo }}
+  {{ $logo = $mainLogo }}
 {{ end }}
 
 {{ $customMenus := site.Params.customMenus }}
@@ -61,31 +59,29 @@
   {{ $customMenus = (index hugo.Data site.Language.Lang).site.customMenus }}
 {{ end }}
 
-{{ $sections := hugo.Data.sections }}
-{{ if (index hugo.Data site.Language.Lang).sections }}
-  {{ $sections = (index hugo.Data site.Language.Lang).sections }}
-{{ end }}
-
 {{ $navBarTitle := (index hugo.Data site.Language.Lang).site.navBarTitle }}
 {{ if not $navBarTitle }}
   {{ $navBarTitle = site.Title }}
 {{ end }}
 
-<nav class="navbar navbar-expand-xl top-navbar shadow {{ if .IsHome}}transparent-navbar homepage{{end}}" id="top-navbar">
+<nav class="navbar navbar-expand-xl top-navbar transparent-navbar" id="top-navbar">
   <div class="container-fluid px-4 px-lg-5">
+
     {{ if not .IsHome }}
-    <button class="navbar-toggler navbar-light" id="sidebar-toggler" type="button">
-      <i data-feather="sidebar"></i>
-    </button>
+      <button class="navbar-toggler navbar-light" id="sidebar-toggler" type="button">
+        <i data-feather="sidebar"></i>
+      </button>
     {{ end }}
+
     <a class="navbar-brand" href="{{ site.BaseURL | relLangURL }}">
       {{ if $logo }}
         <img src="{{ $logo }}" id="logo" alt="Logo">
       {{ end }}
       {{- $navBarTitle -}}
     </a>
+
     <button
-      class="navbar-toggler {{if .IsHome}}navbar-dark{{else}}navbar-light{{end}}"
+      class="navbar-toggler navbar-dark"
       id="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
@@ -96,117 +92,416 @@
     </button>
 
     <div class="collapse navbar-collapse dynamic-navbar" id="top-nav-items">
-      <ul class="nav navbar-nav ms-auto">
+      <ul class="nav navbar-nav ms-auto align-items-center">
+
         <li class="nav-item">
-          <a class="nav-link" href="{{ if .IsHome }}#home{{else}}{{ site.BaseURL | relLangURL }}#home{{end}}">{{ i18n "home" }}</a>
+          <a class="nav-link" href="{{ site.BaseURL | relLangURL }}#home">
+            Home
+          </a>
         </li>
-        {{ if $sections }}
-          {{ $sectionCount := 1 }}
-          {{ range sort $sections "section.weight" }}
-            {{ if and (.section.enable) (.section.showOnNavbar)}}
-              {{ $sectionCount  = add $sectionCount 1}}
-              {{ if le $sectionCount $maxVisibleSections }}
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ partial "helpers/get-section-url.html" . }}">{{ .section.name }}</a>
-                </li>
-              {{ end }}
-            {{ end }}
-          {{- end }}
-          {{ if gt $sectionCount $maxVisibleSections }}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{i18n "more" }}</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {{ $sectionCount := 1 }}
-                {{ range sort $sections "section.weight" }}
-                  {{ if and (.section.enable) (.section.showOnNavbar) }}
-                    {{ $sectionCount  = add $sectionCount 1}}
-                    {{ if gt $sectionCount $maxVisibleSections }}
-                      <a class="dropdown-item" href="{{ partial "helpers/get-section-url.html" . }}">{{ .section.name }}</a>
-                    {{ end }}
-                  {{ end }}
-                {{- end }}
-              </div>
-            </li>
-          {{ end }}
-        {{- end }}
-        {{ $shouldAddSeparator:= partial "helpers/add-navbar-separator.html" . }}
-        {{ if $shouldAddSeparator }}
-          <div id="top-navbar-divider"></div>
-        {{ end }}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ site.BaseURL | relLangURL }}#about">
+            About
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ site.BaseURL | relLangURL }}#projects">
+            Featured Projects
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ site.BaseURL | relLangURL }}#skills">
+            Skills
+          </a>
+        </li>
+
         {{ if $blogEnabled }}
           <li class="nav-item">
-            <a class="nav-link" id="blog-link" href="{{ path.Join (site.BaseURL | relLangURL) "posts" }}">{{ $blogTitle }}</a>
+            <a class="nav-link" id="blog-link" href="{{ path.Join (site.BaseURL | relLangURL) "posts" }}">
+              {{ $blogTitle }}
+            </a>
           </li>
         {{ end }}
+
         {{ if $notesEnabled }}
           <li class="nav-item">
-            <a class="nav-link" id="note-link" href="{{ path.Join (site.BaseURL | relLangURL) "notes" }}">{{ $notesTitle }}</a>
+            <a class="nav-link" id="note-link" href="{{ path.Join (site.BaseURL | relLangURL) "notes" }}">
+              {{ $notesTitle }}
+            </a>
           </li>
         {{ end }}
-        {{/* Docs link intentionally removed */}}
+
         {{ range $customMenus }}
-            {{ if (not .hideFromNavbar) }}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ .url }}">{{ .name }}</a>
-              </li>
-            {{ end }}
+          {{ if not .hideFromNavbar }}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ .url }}">
+                {{ .name }}
+              </a>
+            </li>
+          {{ end }}
         {{ end }}
-        {{/* Me page link */}}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ site.BaseURL | relLangURL }}me">Me</a>
+
+        <li class="nav-item nav-divider-item">
+          <span class="nav-divider">|</span>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ site.BaseURL | relLangURL }}me/">
+            Me
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ site.BaseURL | relLangURL }}projects/">
+            Projects
+          </a>
+        </li>
+
         {{ if .IsTranslated }}
           {{ partial "navigators/lang-selector.html" . }}
         {{ end }}
-        {{/* Live clock */}}
-        <li class="nav-item d-flex align-items-center px-2">
-          <span id="navbar-clock" style="font-size: 0.85rem; font-family: monospace; letter-spacing: 0.05em; color: inherit; transition: color 0.3s;"></span>
 
+        <li class="nav-item d-flex align-items-center px-2">
+          <span id="navbar-clock"></span>
         </li>
-        {{ if or site.Params.features.darkMode.enable site.Params.features.theme.enable }}
-          {{ partial "navigators/theme-selector.html" . }}
-        {{ end }}
+
       </ul>
     </div>
   </div>
-  <!-- Store the logo information in a hidden img for the JS -->
+
   {{ if $mainLogo }}
     <img src="{{ $mainLogo }}" class="d-none" id="main-logo" alt="Logo">
   {{ end }}
+
   {{ if $invertedLogo }}
     <img src="{{ $invertedLogo }}" class="d-none" id="inverted-logo" alt="Inverted Logo">
   {{ end }}
+
   {{ if $darkLogo }}
     <img src="{{ $darkLogo }}" class="d-none" id="dark-logo" alt="Dark Logo">
   {{ end }}
 
-<style>
-/* Default Light Mode Behavior */
-.transparent-navbar #navbar-clock { color: #fff !important; }
-.top-navbar:not(.transparent-navbar) #navbar-clock { color: inherit !important; }
+  <style>
+    #top-navbar {
+      min-height: 56px !important;
+      height: 56px !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      transition:
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+      z-index: 9999;
+    }
 
-/* Force White in Dark Mode (catches both OS preference and Toha's manual toggle) */
-@media (prefers-color-scheme: dark) {
-    #navbar-clock { color: #fff !important; }
-}
-[data-theme="dark"] #navbar-clock,
-body.dark #navbar-clock {
-    color: #fff !important;
-}
-</style>
+    #top-navbar .container-fluid {
+      min-height: 56px !important;
+      height: 56px !important;
+      display: flex;
+      align-items: center;
+      padding-left: 2.5rem !important;
+      padding-right: 2.5rem !important;
+    }
+
+    #top-navbar .navbar-brand {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-right: 1.5rem;
+      font-weight: 600;
+      font-size: 1.2rem !important;
+      color: #ffffff !important;
+    }
+
+    #top-navbar #logo {
+      max-height: 42px !important;
+      width: auto;
+      margin-right: 0.65rem;
+    }
+
+    #top-navbar .navbar-nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    #top-navbar .nav-item {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    #top-navbar .nav-link {
+      padding: 0.45rem 0.55rem !important;
+      white-space: nowrap;
+      color: #ffffff !important;
+      font-size: 1.05rem !important;
+      border-radius: 0.25rem;
+      border-bottom: 2px solid transparent !important;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    #top-navbar .nav-link:hover {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      border-bottom: 2px solid #b20808 !important;
+    }
+
+    #top-navbar .nav-link.active {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.18) !important;
+      border-bottom: 2px solid #b20808 !important;
+    }
+
+    #top-navbar .nav-link.active,
+    #top-navbar .nav-link:hover,
+    #top-navbar .nav-link:focus {
+      border-bottom-color: #b20808 !important;
+    }
+
+    #top-navbar .nav-link::after,
+    #top-navbar .nav-link.active::after,
+    #top-navbar .nav-link:hover::after {
+      background: #b20808 !important;
+      border-color: #b20808 !important;
+    }
+
+    #top-navbar .nav-divider {
+      opacity: 0.7;
+      padding: 0 0.25rem;
+      line-height: 1;
+      color: #ffffff !important;
+    }
+
+    #navbar-clock {
+      font-size: 0.95rem;
+      font-family: monospace;
+      letter-spacing: 0.05em;
+      color: #ffffff !important;
+      transition: color 0.3s;
+    }
+
+    #top-navbar.transparent-navbar {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    #top-navbar.scrolled-navbar {
+      background: rgba(0, 0, 0, 0.92) !important;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+    }
+
+    #top-navbar.transparent-navbar .navbar-brand,
+    #top-navbar.transparent-navbar .nav-link,
+    #top-navbar.transparent-navbar .nav-divider,
+    #top-navbar.transparent-navbar #navbar-clock,
+    #top-navbar.scrolled-navbar .navbar-brand,
+    #top-navbar.scrolled-navbar .nav-link,
+    #top-navbar.scrolled-navbar .nav-divider,
+    #top-navbar.scrolled-navbar #navbar-clock,
+    #top-navbar #navbar-clock {
+      color: #ffffff !important;
+    }
+
+    #top-navbar.scrolled-navbar .nav-link.active {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.18) !important;
+      border-bottom: 2px solid #b20808 !important;
+    }
+
+    #top-navbar.scrolled-navbar .nav-link:hover {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      border-bottom: 2px solid #b20808 !important;
+    }
+
+    #top-navbar .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.35) !important;
+      color: #ffffff !important;
+    }
+
+    #top-navbar .navbar-toggler i,
+    #top-navbar .navbar-toggler svg {
+      color: #ffffff !important;
+      stroke: #ffffff !important;
+    }
+
+    @media (max-width: 1199px) {
+      #top-navbar {
+        height: auto !important;
+        min-height: 56px !important;
+      }
+
+      #top-navbar .container-fluid {
+        height: auto !important;
+        min-height: 56px !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+
+      #top-navbar .navbar-collapse {
+        background: rgba(0, 0, 0, 0.94);
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      #top-navbar .navbar-nav {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      #top-navbar .nav-item {
+        width: 100%;
+      }
+
+      #top-navbar .nav-divider-item {
+        display: none !important;
+      }
+    }
+  </style>
 </nav>
 
 <script>
   (function () {
     function updateClock() {
-  var el = document.getElementById("navbar-clock");
-  if (!el) return;
-  var now = new Date();
-  var h = now.getHours() % 12 || 12;
-  var m = String(now.getMinutes()).padStart(2, "0");
-  el.textContent = h + ":" + m;
-}
-    updateClock();
+      var el = document.getElementById("navbar-clock");
+      if (!el) return;
+
+      var now = new Date();
+      var h = now.getHours() % 12 || 12;
+      var m = String(now.getMinutes()).padStart(2, "0");
+
+      el.textContent = h + ":" + m;
+    }
+
+    function updateNavbarColor() {
+      var nav = document.getElementById("top-navbar");
+      var logo = document.getElementById("logo");
+      var invertedLogo = document.getElementById("inverted-logo");
+      var mainLogo = document.getElementById("main-logo");
+
+      if (!nav) return;
+
+      if (window.scrollY < 40) {
+        nav.classList.add("transparent-navbar");
+        nav.classList.remove("scrolled-navbar");
+
+        if (logo && invertedLogo) {
+          logo.src = invertedLogo.src;
+        }
+      } else {
+        nav.classList.remove("transparent-navbar");
+        nav.classList.add("scrolled-navbar");
+
+        if (logo && mainLogo) {
+          logo.src = mainLogo.src;
+        }
+      }
+    }
+
+    function normalizePath(path) {
+      if (!path) return "/";
+      return path.replace(/\/$/, "") || "/";
+    }
+
+    function clearActiveLinks() {
+      document.querySelectorAll("#top-navbar .nav-link").forEach(function (link) {
+        link.classList.remove("active");
+      });
+    }
+
+    function activateLinkByText(text) {
+      document.querySelectorAll("#top-navbar .nav-link").forEach(function (link) {
+        if (link.textContent.trim() === text) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    function activateLinkByHash(hash) {
+      document.querySelectorAll("#top-navbar .nav-link").forEach(function (link) {
+        var href = link.getAttribute("href");
+        if (!href) return;
+
+        try {
+          var url = new URL(href, window.location.origin);
+
+          if (url.hash === hash) {
+            link.classList.add("active");
+          }
+        } catch (e) {}
+      });
+    }
+
+    function updateActiveNavLink() {
+      var currentPath = normalizePath(window.location.pathname);
+      var currentHash = window.location.hash;
+
+      clearActiveLinks();
+
+      if (currentPath === "/me") {
+        activateLinkByText("Me");
+        return;
+      }
+
+      if (currentPath === "/projects" || currentPath.startsWith("/projects/")) {
+        activateLinkByText("Projects");
+        return;
+      }
+
+      if (currentPath === "/") {
+        if (currentHash) {
+          activateLinkByHash(currentHash);
+          return;
+        }
+
+        activateLinkByText("Home");
+      }
+    }
+
+    function initNavbar() {
+      updateClock();
+      updateNavbarColor();
+      updateActiveNavLink();
+    }
+
+    initNavbar();
+
     setInterval(updateClock, 1000);
+
+    window.addEventListener("scroll", function () {
+      updateNavbarColor();
+    });
+
+    window.addEventListener("load", function () {
+      updateNavbarColor();
+      updateActiveNavLink();
+    });
+
+    window.addEventListener("hashchange", function () {
+      updateActiveNavLink();
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      updateNavbarColor();
+      updateActiveNavLink();
+    });
+
+    document.querySelectorAll("#top-navbar .nav-link").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setTimeout(function () {
+          updateNavbarColor();
+          updateActiveNavLink();
+        }, 80);
+      });
+    });
   })();
 </script>

@@ -1,0 +1,497 @@
+{{ define "sidebar" }}{{ end }}
+{{ define "toc" }}{{ end }}
+
+{{ define "navbar" }}
+{{ partial "navigators/navbar.html" . }}
+
+<style>
+  #top-navbar,
+  #top-navbar.transparent-navbar,
+  #top-navbar.scrolled-navbar {
+    background: rgba(0, 0, 0, 0.92) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  #top-navbar .navbar-brand,
+  #top-navbar .nav-link,
+  #top-navbar .nav-divider,
+  #top-navbar #navbar-clock {
+    color: #ffffff !important;
+  }
+
+  #top-navbar .nav-link.active {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-bottom: 2px solid #b20808 !important;
+    color: #ffffff !important;
+  }
+
+  #top-navbar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-bottom: 2px solid #b20808 !important;
+    color: #ffffff !important;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var nav = document.getElementById("top-navbar");
+    var logo = document.getElementById("logo");
+    var mainLogo = document.getElementById("main-logo");
+
+    if (nav) {
+      nav.classList.remove("transparent-navbar");
+      nav.classList.add("scrolled-navbar");
+    }
+
+    if (logo && mainLogo) {
+      logo.src = mainLogo.src;
+    }
+  });
+
+  window.addEventListener("load", function () {
+    var nav = document.getElementById("top-navbar");
+    var logo = document.getElementById("logo");
+    var mainLogo = document.getElementById("main-logo");
+
+    if (nav) {
+      nav.classList.remove("transparent-navbar");
+      nav.classList.add("scrolled-navbar");
+    }
+
+    if (logo && mainLogo) {
+      logo.src = mainLogo.src;
+    }
+  });
+</script>
+{{ end }}
+
+{{ define "content" }}
+
+<style>
+  html,
+  body {
+    overflow-x: hidden !important;
+    background: #f2f2f2 !important;
+  }
+
+  .container-fluid.bg-secondary.wrapper,
+  .container-fluid.bg-secondary.wrapper > .row,
+  #content-section,
+  #content-section .content {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex: none !important;
+    float: none !important;
+    clear: both !important;
+    overflow: visible !important;
+    background: #f2f2f2 !important;
+  }
+
+  .project-single-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 8rem 0 5rem;
+    background: #f2f2f2;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  #project-single-vanta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: #f2f2f2;
+  }
+
+  .project-single-wrap {
+    position: relative;
+    z-index: 2;
+    width: min(92vw, 980px);
+    margin: 0 auto;
+  }
+
+  .project-back-link {
+    color: #000000 !important;
+    text-decoration: none !important;
+    display: inline-block;
+    margin-bottom: 1.8rem;
+    font-weight: 700;
+    font-size: 0.98rem;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .project-back-link:hover {
+    color: #b20808 !important;
+    transform: translateX(-3px);
+  }
+
+  .project-single-card {
+    background: #000000;
+    border: 1px solid rgba(172, 27, 27, 0.22);
+    border-radius: 0.65rem;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+    color: #ffffff;
+  }
+
+  .project-single-header {
+    padding: 3rem 3rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    background: #000000;
+  }
+
+  .project-single-header h1 {
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin: 0 0 1rem;
+    color: #ffffff;
+  }
+
+  .project-single-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: 1.4rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  .project-single-summary {
+    color: #ffffff;
+    font-size: 1.08rem;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .project-single-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.4rem;
+  }
+
+  .project-single-action {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.42rem;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    color: #ffffff !important;
+    background: transparent;
+    text-decoration: none !important;
+    font-size: 0.82rem;
+    font-weight: 800;
+    line-height: 1;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .project-single-action:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.45);
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  }
+
+  .project-single-action:first-child {
+    background: #4f6588;
+    border-color: #395075;
+    color: #ffffff !important;
+  }
+
+  .project-single-action:first-child:hover {
+    background: #334155;
+    border-color: #334155;
+  }
+
+  .project-single-content {
+    padding: 2.6rem 3rem 3rem;
+    background: #000000;
+  }
+
+  .project-single-content h1,
+  .project-single-content h2,
+  .project-single-content h3,
+  .project-single-content h4 {
+    color: #ffffff;
+    font-weight: 800;
+  }
+
+  .project-single-content h2 {
+    margin-top: 2.2rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.55rem;
+  }
+
+  .project-single-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .project-single-content p,
+  .project-single-content li {
+    color: #ffffff;
+    line-height: 1.8;
+    font-size: 1.02rem;
+  }
+
+  .project-single-content a {
+    color: #d72a20 !important;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .project-single-content a:hover {
+    color: #ff4a3d !important;
+  }
+
+  .project-single-content img {
+    display: block !important;
+    width: auto !important;
+    max-width: 340px !important;
+    max-height: 340px !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 0.65rem;
+    margin: 1.4rem auto;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .project-single-content video {
+    display: block !important;
+    width: auto !important;
+    max-width: 340px !important;
+    max-height: 360px !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 0.65rem;
+    margin: 1.4rem auto;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: #050505;
+  }
+
+  .project-image-stack {
+    display: grid;
+    gap: 1rem;
+    margin: 1.6rem auto 1.4rem;
+    justify-content: center;
+    align-items: start;
+  }
+
+  .project-image-stack.two-images {
+    grid-template-columns: repeat(2, minmax(0, 260px));
+  }
+
+  .project-image-stack.four-images {
+    grid-template-columns: repeat(2, minmax(0, 230px));
+  }
+
+  .project-image-stack figure {
+    margin: 0;
+    text-align: center;
+  }
+
+  .project-image-stack img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 250px !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 0.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: #050505;
+    margin: 0 auto !important;
+  }
+
+  .project-image-stack figcaption {
+    margin-top: 0.45rem;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+.project-video-block {
+  width: min(100%, 600px);
+  margin: 1.4rem auto 2.7rem;
+  text-align: center;
+}
+
+.project-video-block video {
+  display: block !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  max-height: 400px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #050505;
+}
+
+  .project-video-caption {
+    margin-top: 0.5rem !important;
+    color: rgba(255, 255, 255, 0.72) !important;
+    font-size: 0.84rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .project-single-content blockquote {
+    border-left: 4px solid #b20808;
+    padding-left: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .project-single-content code {
+    background: #111111;
+    color: #ffffff;
+    border-radius: 0.3rem;
+    padding: 0.15rem 0.35rem;
+  }
+
+  .project-single-content pre {
+    background: #111111;
+    color: #ffffff;
+    border-radius: 0.55rem;
+    padding: 1rem;
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .project-single-content pre code {
+    padding: 0;
+    background: transparent;
+  }
+
+  @media (max-width: 768px) {
+    .project-single-page {
+      padding: 7rem 0 4rem;
+    }
+
+    .project-single-header,
+    .project-single-content {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .project-single-header {
+      padding-top: 2.2rem;
+    }
+
+    .project-single-content {
+      padding-bottom: 2.2rem;
+    }
+
+    .project-single-content img,
+    .project-single-content video {
+      max-width: 100% !important;
+      max-height: none !important;
+    }
+
+    .project-image-stack.two-images,
+    .project-image-stack.four-images {
+      grid-template-columns: 1fr;
+    }
+
+    .project-image-stack img {
+      max-height: none !important;
+    }
+
+    .project-video-block {
+      width: 100%;
+    }
+
+    .project-video-block video {
+      max-width: 100% !important;
+      max-height: none !important;
+    }
+  }
+</style>
+
+<div class="project-single-page">
+  <div id="project-single-vanta-bg"></div>
+
+  <div class="project-single-wrap">
+    <a class="project-back-link" href="/projects/">← Back to Projects</a>
+
+    <article class="project-single-card">
+      <header class="project-single-header">
+        <h1>{{ .Title }}</h1>
+
+        <div class="project-single-meta">
+          {{ with .Params.timeline }}
+            <span>{{ . }}</span>
+          {{ end }}
+
+          {{ with .Params.role }}
+            <span>• {{ . }}</span>
+          {{ end }}
+        </div>
+
+        {{ with .Params.summary }}
+          <p class="project-single-summary">{{ . }}</p>
+        {{ end }}
+
+        <div class="project-single-actions">
+          {{ with .Params.repo }}
+            <a class="project-single-action" href="{{ . }}" target="_blank" rel="noopener">
+              GitHub
+            </a>
+          {{ end }}
+
+          {{ with .Params.report }}
+            <a class="project-single-action" href="{{ . }}" target="_blank" rel="noopener">
+              Technical Report
+            </a>
+          {{ end }}
+        </div>
+      </header>
+
+      <main class="project-single-content">
+        {{ .Content }}
+      </main>
+    </article>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof VANTA !== "undefined") {
+      VANTA.GLOBE({
+        el: "#project-single-vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xbb131b,
+        size: 1.30,
+        backgroundColor: 0xf2f2f2
+      });
+    }
+  });
+</script>
+
+{{ end }}

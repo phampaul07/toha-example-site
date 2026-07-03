@@ -1,0 +1,451 @@
+{{ $data := . }}
+{{ $section := $data.section }}
+
+{{ if $section.enable }}
+<section id="{{ $section.id }}" class="skills-section">
+  <div class="skills-container">
+    {{ if not $section.hideTitle }}
+      <h1 class="skills-title">{{ $section.name }}</h1>
+    {{ end }}
+
+    {{ if $section.filter }}
+      <div class="skill-filter-wrapper">
+        <div class="skill-filter-buttons">
+          {{ range $index, $button := $data.buttons }}
+            <button
+              class="skill-filter-btn {{ if eq $index 0 }}active{{ end }}"
+              data-filter="{{ $button.filter }}"
+            >
+              {{ $button.name }}
+            </button>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+
+    <div class="skills-grid" id="skills-grid">
+      {{ range $index, $skill := $data.skills }}
+        <div
+          class="skill-card"
+          data-index="{{ $index }}"
+          data-categories="{{ delimit $skill.categories "," }}"
+        >
+          <div class="skill-card-header">
+            {{ if $skill.logo }}
+              {{ $logoPath := strings.TrimPrefix "/" $skill.logo }}
+              {{ $logoPath = strings.TrimPrefix "assets/" $logoPath }}
+              {{ $logo := resources.Get $logoPath }}
+
+              {{ if $logo }}
+                <img class="skill-logo" src="{{ $logo.RelPermalink }}" alt="{{ $skill.name }}">
+              {{ else }}
+                <img class="skill-logo" src="{{ $skill.logo }}" alt="{{ $skill.name }}">
+              {{ end }}
+            {{ end }}
+
+            <h5>{{ $skill.name }}</h5>
+          </div>
+
+          <div class="skill-card-body">
+            <p>{{ $skill.summary }}</p>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+
+    <div class="skills-pagination">
+      <button id="skills-prev" class="skills-page-btn">
+        <span>←</span> Previous
+      </button>
+
+      <div id="skills-page-label" class="skills-page-label">
+        Page 1 of 1
+      </div>
+
+      <button id="skills-next" class="skills-page-btn">
+        Next <span>→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-section {
+    padding: 4.5rem 0 4.75rem;
+    background: #ffffff;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  .skills-container {
+    width: min(92vw, 1080px);
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .skills-title {
+    text-align: center;
+    margin-bottom: 1.15rem;
+    color: #000000;
+    font-size: 2.45rem;
+    font-weight: 500;
+  }
+
+  .skill-filter-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.65rem;
+    width: 100%;
+  }
+
+  .skill-filter-buttons {
+    display: inline-flex;
+    justify-content: center;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: 0.35rem;
+    background: #000000;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14);
+  }
+
+  .skill-filter-btn {
+    border: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    color: #ffffff;
+    padding: 0.5rem 0.95rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .skill-filter-btn:last-child {
+    border-right: none;
+  }
+
+  .skill-filter-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .skill-filter-btn.active {
+    background: #b20808;
+    color: #ffffff;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .skill-card {
+    border: 1px solid rgba(172, 27, 27, 0.12);
+    border-radius: 0.45rem;
+    overflow: hidden;
+    background: #000000;
+    display: none;
+    min-height: 154px;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.22s ease,
+      border-color 0.22s ease,
+      opacity 0.24s ease;
+  }
+
+  .skill-card.show {
+    display: block;
+  }
+
+  .skill-card.slide-in {
+    animation: skillSlideIn 0.28s ease both;
+  }
+
+  @keyframes skillSlideIn {
+    from {
+      opacity: 0;
+      transform: translate(18px, 10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  .skill-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+    border-color: rgba(255, 255, 255, 0.38);
+  }
+
+  .skill-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 48px;
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+    background: #ffffff;
+  }
+
+  .skill-card-header h5 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #000000;
+  }
+
+  .skill-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex: 0 0 auto;
+  }
+
+  .skill-card-body {
+    padding: 0.8rem;
+  }
+
+  .skill-card-body p {
+    margin: 0;
+    line-height: 1.48;
+    color: #ffffff;
+    font-size: 0.96rem;
+  }
+
+  .skills-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.8rem;
+    width: 100%;
+  }
+
+  .skills-page-btn,
+  .skills-page-label {
+    min-width: 118px;
+    height: 42px;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(222, 222, 222, 0.18);
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .skills-page-btn {
+    background: #aeaeae;
+    cursor: pointer;
+    gap: 0.45rem;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .skills-page-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #8f8f8f;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
+  }
+
+  .skills-page-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .skills-page-label {
+    background: #000000;
+    border-color: #000000;
+    color: #ffffff;
+  }
+
+  .skills-page-btn span {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+
+  @media (max-width: 992px) {
+    .skills-container {
+      width: min(92vw, 760px);
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .skill-filter-buttons {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .skills-section {
+      padding: 4rem 0;
+    }
+
+    .skills-container {
+      width: 92vw;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .skills-title {
+      font-size: 2.1rem;
+    }
+
+    .skill-filter-buttons {
+      display: flex;
+      width: 100%;
+    }
+
+    .skill-filter-btn {
+      flex: 1 1 auto;
+      font-size: 0.82rem;
+      padding: 0.5rem 0.65rem;
+    }
+
+    .skills-pagination {
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .skills-page-btn,
+    .skills-page-label {
+      min-width: 105px;
+      height: 40px;
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const grid = document.getElementById("skills-grid");
+    const cards = Array.from(document.querySelectorAll("#skills-grid .skill-card"));
+    const filterButtons = Array.from(document.querySelectorAll(".skill-filter-btn"));
+    const prevButton = document.getElementById("skills-prev");
+    const nextButton = document.getElementById("skills-next");
+    const pageLabel = document.getElementById("skills-page-label");
+
+    if (!grid || !cards.length || !prevButton || !nextButton || !pageLabel) {
+      return;
+    }
+
+    const pageSize = 6;
+    let currentPage = 1;
+    let currentFilter = "All";
+    let filteredCards = [];
+
+    function cardCategories(card) {
+      return card.dataset.categories
+        ? card.dataset.categories.split(",").map(category => category.trim())
+        : [];
+    }
+
+    function cardMatchesFilter(card, filter) {
+      const categories = cardCategories(card);
+      return filter === "All" || categories.includes(filter);
+    }
+
+    function getFilteredCards() {
+      const matching = cards.filter(card => cardMatchesFilter(card, currentFilter));
+
+      if (currentFilter === "All") {
+        return matching.sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));
+      }
+
+      return matching.sort((a, b) => {
+        const aCategories = cardCategories(a);
+        const bCategories = cardCategories(b);
+
+        const aPrimary = aCategories[0] === currentFilter ? 0 : 1;
+        const bPrimary = bCategories[0] === currentFilter ? 0 : 1;
+
+        if (aPrimary !== bPrimary) {
+          return aPrimary - bPrimary;
+        }
+
+        return Number(a.dataset.index) - Number(b.dataset.index);
+      });
+    }
+
+    function renderSkills(animate = true) {
+      filteredCards = getFilteredCards();
+
+      const totalPages = Math.max(1, Math.ceil(filteredCards.length / pageSize));
+
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      const visibleCards = filteredCards.slice(start, end);
+
+      cards.forEach(card => {
+        card.classList.remove("show", "slide-in");
+      });
+
+      visibleCards.forEach(card => {
+        grid.appendChild(card);
+        card.classList.add("show");
+
+        if (animate) {
+          card.classList.add("slide-in");
+
+          setTimeout(() => {
+            card.classList.remove("slide-in");
+          }, 300);
+        }
+      });
+
+      pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = currentPage === totalPages;
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", function () {
+        if (button.classList.contains("active")) return;
+
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        currentFilter = button.dataset.filter;
+        currentPage = 1;
+        renderSkills(true);
+      });
+    });
+
+    prevButton.addEventListener("click", function () {
+      if (currentPage > 1) {
+        currentPage--;
+        renderSkills(true);
+      }
+    });
+
+    nextButton.addEventListener("click", function () {
+      const totalPages = Math.max(1, Math.ceil(filteredCards.length / pageSize));
+
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderSkills(true);
+      }
+    });
+
+    renderSkills(false);
+  });
+</script>
+{{ end }}
