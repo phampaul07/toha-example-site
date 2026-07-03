@@ -1,0 +1,52 @@
+# section information
+section:
+  name: About
+  id: about
+  enable: true
+  weight: 1
+  showOnNavbar: true
+  template: sections/about.html
+
+# your designation
+designation: Electrical Engineer Student
+# your company information
+company:
+  name: Washington University in St. Louis
+  url: "https://engineering.washu.edu/index.html"
+
+
+profileImage: "images/author/aura.jpg"
+
+# a summary about you
+summary: 'I am a passionate electrical engineer student with a strong interest in embedded systems, PCB design, and computer vision. I am currently pursuing my degree at Washington University in St. Louis, where I have gained hands-on experience in designing and implementing innovative solutions to complex engineering problems. My goal is to leverage my skills and knowledge to contribute to the development of cutting-edge technologies that can make a positive impact on society!'
+
+# your social links
+# give as many as you want. use font-awesome for the icons.
+socialLinks:
+- name: Email
+  icon: "fas fa-envelope"
+  url: "phampp07@gmail.com"
+
+- name: Github
+  icon: "fab fa-github"
+  url: "https://github.com/phampaul07"
+
+- name: LinkedIn
+  icon: "fab fa-linkedin"
+  url: "https://www.linkedin.com/in/paul-pham07/"
+
+- name: Instagram
+  icon: "fab fa-instagram"
+  url: "https://www.instagram.com/pham_paul07/"
+
+
+
+# You can put custom buttons to link your relevant resources.
+# For example, you can put link for your resume.
+resourceLinks:
+- title: "My Resume"
+  url: "files/resume.pdf"
+
+
+
+

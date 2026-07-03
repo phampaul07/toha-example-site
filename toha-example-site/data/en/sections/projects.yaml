@@ -1,6 +1,6 @@
 # section information
 section:
-  name: Projects
+  name: Featured Projects
   id: projects
   enable: true
   weight: 3
@@ -22,17 +22,20 @@ projects:
 - name: Pomodoro Cube
   image: /images/sections/projects/pomodoro.png
   role: Developer
+  featured: true
   timeline: "June 2026 - Present"
-  repo: https://github.com/phampaul07/pomodoro-cube.git # If your project is a public repo on GitHub, then provide this link. it will show star count.
-  #url: ""  # If your project is not a public repo but it has a website or any external details url then provide it here. don't provide "repo" and "url" simultaneously.
-  summary: A Pomodoro timer with a physical cube that can be rotated to start, pause, and reset the timer. 
+  page: /projects/pomodoro-cube/
+  repo: https://github.com/phampaul07/pomodoro-cube.git
+  summary: A Pomodoro timer with a physical cube that can be rotated to start, pause, and reset the timer.
   tags: ["All","Personal", "KiCad", "PCB Design", "Embedded Systems", "Fusion360", "Circuit Python", "Soldering"]
 
 - name: Autonomous Arm w/ Computer Vision (AACV) 
   image: /images/sections/projects/aacv.png
   role: Co-Developer
+  featured: true
   timeline: "June 2026 - Present"
   repo: https://github.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision.git
+  page: /projects/aacv/
   #url: ""
   summary: An autonomous 6-DOF robotic arm that uses computer vision to detect and sort objects into designated bins. 
   tags: ["All", "Personal", "Python", "Computer Vision", "3D Modeling", "OpenCV"]
@@ -41,18 +44,21 @@ projects:
   image: /images/sections/projects/fpga.jpg
   role: Developer
   timeline: "May 2026"
+  page: /projects/Simon-Says/
   repo: https://github.com/phampaul07/Simon_Says
   #url: ""
   summary: A Simon Says sequence game on an FPGA using Verilog based on behavioral modeling.
   tags: ["All", "Academic", "Verilog", "FPGA", "Digital Design", "Finite State Machines"]
 
-- name: Autonomous PiCar 
+- name: Autonomous PiCar
   image: /images/sections/projects/picar.jpeg
-  role: Developer 
+  role: Developer
+  featured: true
   timeline: "May 2026"
+  page: /projects/autonomous-picar/
   repo: https://github.com/phampaul07/Pi-Car
-  url: "/files/picarpaper.pdf"
-  summary: An autonomous Raspberry Pi-based vehicle featuring custom Python scripts for real-time PID motor control, and computer vision for navigation. <br> [View Technical Report](/files/picarpaper.pdf)
+  report: /files/picarpaper.pdf
+  summary: An autonomous Raspberry Pi-based vehicle featuring custom Python scripts for real-time PID motor control and computer vision for navigation.
   tags: ["All", "Academic", "Python", "OpenCV", "PID Control", "Computer Vision"]
 
 
@@ -60,20 +66,23 @@ projects:
   role: Co-Author 
   timeline: "December 2025"
   repo: https://github.com/phampaul07/Optical-Imaging-as-a-Linear-System
-  summary:  The design and implementation of a linear optical imaging system in MATLAB to simulate and analyze the behavior of light rays, specifically the formation of images in free space.<br> [View Technical Report](/files/optic.pdf)
+  summary:  The design and implementation of a linear optical imaging system in MATLAB to simulate and analyze the behavior of light rays, specifically the formation of images in free space.
+  report: /files/optic.pdf
   tags: ["All", "Academic", "MATLAB", "Optical Engineering", "Linear Systems"]
 
 - name: Circuits as Resonators, Sensors, and Filters
   role: Co-Author 
   timeline: "November 2025"
   repo: https://github.com/phampaul07/Circuits-as-Resonators-Sensors-and-Filters-
-  summary:  The design and implementation of a linear dynamical system model in MATLAB to simulate and analyze the behavior of electrical circuits. <br> [View Technical Report](/files/circuits.pdf)
+  summary:  The design and implementation of a linear dynamical system model in MATLAB to simulate and analyze the behavior of electrical circuits. 
+  report: /files/circuits.pdf
   tags: ["All", "Academic", "MATLAB", "RLC Circuits", "Circuit Analysis", "Dynamic Systems"]
 
 - name: Handwritten Digit Classification via K-Means Cluster
   role: Co-Author 
   timeline: "October 2025"
   repo: https://github.com/phampaul07/Handwritten-Digit-Classification
-  summary:  The design and implementation of a system to classify handwritten digits using the K-Means clustering algorithm made from first principles. <br> [View Technical Report](/files/kmeans.pdf)
+  summary:  The design and implementation of a system to classify handwritten digits using the K-Means clustering algorithm made from first principles.
+  report: /files/kmeans.pdf
   tags: ["All", "Academic", "MATLAB", "Machine Learning", "K-Means Algorithm"]
 

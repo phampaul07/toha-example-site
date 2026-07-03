@@ -1,0 +1,125 @@
+{{ $author := (index site.Data site.Language.Lang).author }}
+<style>
+  /* Import a sleek, modern font with ultra-thin options */
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400&display=swap');
+
+  #home.custom-hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-color: #0a0a0a; /* Deep dark background */
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* Placeholder for your future 3D Particle Wave */
+  #canvas-container {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  /* TEXT OVERLAY: Perfectly centered */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; 
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white !important;
+    pointer-events: auto; 
+  }
+
+  /* Avatar Restored & Styled */
+  .hero-avatar {
+    width: 120px; 
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Sleek, semi-transparent border */
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); /* Soft drop shadow */
+  }
+  
+  /* The massive, thin "Jaxon-style" Name */
+  .hero-content h1 {
+    font-size: 5rem;
+    font-weight: 100; 
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+    color: white !important;
+    line-height: 1;
+  }
+
+  /* Navigation Links below the name */
+  .hero-links {
+    display: flex;
+    gap: 2.5rem; 
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .hero-links a {
+    color: white !important;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 300;
+    position: relative;
+    padding-bottom: 4px;
+    transition: opacity 0.3s ease;
+  }
+
+  .hero-links a:hover {
+    opacity: 0.7;
+  }
+
+  /* The elegant underline hover effect */
+  .hero-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease;
+  }
+
+  .hero-links a:hover::after {
+    width: 100%;
+  }
+</style>
+
+<div id="home" class="custom-hero">
+  <!-- The particle wave will eventually go here -->
+  <div id="canvas-container"></div>
+
+  <div class="hero-overlay">
+    <div class="hero-content">
+      
+      <!-- Profile Picture -->
+      <img class="hero-avatar" src="{{ $author.image | relURL }}" alt="{{ $author.nickname }}">
+
+      <!-- Big Name -->
+      <h1>{{ $author.name | default "Paul Pham" }}</h1>
+      
+      <!-- Minimalist Navigation Menu -->
+      <ul class="hero-links">
+        <li><a href="#about">Me</a></li>
+        <li><a href="#experience">Path</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#blog">Blog</a></li>
+      </ul>
+
+    </div>
+  </div>
+</div>

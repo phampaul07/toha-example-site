@@ -1,0 +1,721 @@
+{{ define "sidebar" }}{{ end }}
+{{ define "toc" }}{{ end }}
+
+{{ define "navbar" }}
+{{ partial "navigators/navbar.html" . }}
+{{ end }}
+
+{{ define "content" }}
+{{ $data := (index site.Data site.Language.Lang).sections.projects }}
+
+<style>
+  html,
+  body {
+    overflow-x: hidden !important;
+    background: #f2f2f2 !important;
+  }
+
+  .container-fluid.bg-secondary.wrapper,
+  .container-fluid.bg-secondary.wrapper > .row,
+  #content-section,
+  #content-section .content {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex: none !important;
+    float: none !important;
+    clear: both !important;
+    overflow: visible !important;
+    background: #f2f2f2 !important;
+  }
+
+  .project-archive-page {
+    position: relative;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100vh;
+    margin: 0 !important;
+    background: #f2f2f2;
+    clear: both !important;
+    overflow: hidden;
+  }
+
+  #project-vanta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: #f2f2f2;
+  }
+
+  .project-archive-hero,
+  .project-archive-main {
+    position: relative;
+    z-index: 2;
+  }
+
+  .project-archive-hero {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 430px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    flex: none !important;
+    background: rgba(0, 0, 0, 0.82);
+  }
+
+  .project-archive-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 75% 25%, rgba(178, 8, 8, 0.22), transparent 36%),
+      radial-gradient(circle at 20% 80%, rgba(0, 0, 0, 0.26), transparent 40%),
+      linear-gradient(135deg, rgba(5, 5, 5, 0.82), rgba(17, 17, 17, 0.82));
+    z-index: 0;
+  }
+
+  .project-archive-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(120deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(60deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 42px 42px;
+    opacity: 0.35;
+    z-index: 1;
+  }
+
+  .project-archive-hero-content {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    padding: 0 1.5rem;
+  }
+
+  .project-archive-hero-content h1 {
+    font-size: clamp(3.2rem, 7vw, 5.6rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin: 0 0 1rem;
+    color: #ffffff;
+  }
+
+  .project-archive-hero-content p {
+    max-width: 760px;
+    margin: 0 auto;
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: #ffffff;
+    opacity: 0.82;
+  }
+
+  .project-archive-main {
+    display: block !important;
+    width: min(94vw, 1280px) !important;
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+    padding: 4rem 0 5rem !important;
+    flex: none !important;
+    background: transparent;
+  }
+
+  .project-archive-title {
+    text-align: center;
+    color: #000000;
+    font-size: 2.6rem;
+    font-weight: 500;
+    margin: 0 0 1.25rem;
+  }
+
+  .project-archive-filter-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .project-archive-filter-buttons {
+    display: inline-flex;
+    justify-content: center;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: 0.35rem;
+    background: #000000;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14);
+  }
+
+  .project-archive-filter-btn {
+    border: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    color: #ffffff;
+    padding: 0.5rem 0.95rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .project-archive-filter-btn:last-child {
+    border-right: none;
+  }
+
+  .project-archive-filter-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .project-archive-filter-btn.active {
+    background: #b20808;
+    color: #ffffff;
+  }
+
+  .project-archive-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem;
+    width: 100%;
+  }
+
+.project-archive-card {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  background: #000000;
+  border: 1px solid rgba(172, 27, 27, 0.18);
+  border-radius: 0.55rem;
+  overflow: hidden;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  min-height: 430px;
+  transform: translateY(0) scale(1);
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    opacity 0.24s ease;
+}
+
+.project-archive-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(178, 8, 8, 0.26), transparent 42%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 35%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.project-archive-card:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.28),
+    0 0 24px rgba(178, 8, 8, 0.22);
+  border-color: rgba(178, 8, 8, 0.7);
+}
+
+.project-archive-card:hover::before {
+  opacity: 1;
+}
+
+
+  .project-archive-card.show {
+    display: flex;
+    animation: projectSlideIn 0.28s ease both;
+  }
+
+  @keyframes projectSlideIn {
+    from {
+      opacity: 0;
+      transform: translate(18px, 10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  .project-archive-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+    border-color: rgba(255, 255, 255, 0.38);
+  }
+
+  .project-archive-image-link {
+    display: block;
+    text-decoration: none !important;
+  }
+
+.project-archive-image {
+  width: 100%;
+  height: 195px;
+  object-fit: cover;
+  display: block;
+  background: #000000;
+  transform: scale(1);
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.project-archive-image-link,
+.project-archive-card-body {
+  position: relative;
+  z-index: 2;
+}
+
+.project-archive-card:hover .project-archive-image {
+  transform: scale(1.06);
+  filter: brightness(1.08) contrast(1.05);
+}
+
+  .project-archive-card-body {
+    padding: 1rem 1.1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: #000000;
+  }
+
+  .project-archive-title-link {
+    text-decoration: none !important;
+  }
+
+  .project-archive-card h3 {
+    color: #ffffff;
+    font-size: 1.22rem;
+    line-height: 1.25;
+    font-weight: 600;
+    margin: 0 0 0.45rem;
+  }
+
+  .project-archive-title-link:hover h3 {
+    text-decoration: underline;
+  }
+
+  .project-archive-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: 0.65rem;
+  }
+
+  .project-archive-card p {
+    color: #ffffff;
+    line-height: 1.48;
+    font-size: 0.95rem;
+    margin: 0 0 0.85rem;
+  }
+
+  .project-archive-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .project-archive-tags span {
+    background: #111111;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.22rem 0.48rem;
+    border-radius: 0.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .project-archive-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: auto;
+  }
+
+  .project-archive-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.38rem 0.68rem;
+    border-radius: 0.4rem;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    color: #ffffff !important;
+    background: transparent;
+    text-decoration: none !important;
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .project-archive-action:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .project-archive-action.primary {
+    background: #4f6588;
+    border-color: #395075;
+    color: #ffffff !important;
+  }
+
+  .project-archive-action.primary:hover {
+    background: #334155;
+    border-color: #334155;
+  }
+
+  .project-archive-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.2rem;
+    width: 100%;
+  }
+
+  .project-page-btn,
+  .project-page-label {
+    min-width: 118px;
+    height: 42px;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(222, 222, 222, 0.18);
+    background: #aeaeae;
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .project-page-label {
+    background: #000000;
+  }
+
+  .project-page-btn {
+    cursor: pointer;
+    gap: 0.45rem;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .project-page-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
+  }
+
+  .project-page-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 992px) {
+    .project-archive-grid {
+      grid-template-columns: 1fr;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .project-archive-hero {
+      height: 340px;
+    }
+
+    .project-archive-filter-buttons {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .project-archive-main {
+      padding: 3rem 0 4rem !important;
+    }
+
+    .project-archive-title {
+      font-size: 2rem;
+    }
+
+    .project-archive-filter-buttons {
+      display: flex;
+      width: 100%;
+    }
+
+    .project-archive-filter-btn {
+      flex: 1 1 auto;
+      padding: 0.5rem 0.6rem;
+      font-size: 0.82rem;
+    }
+
+    .project-archive-pagination {
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .project-page-btn,
+    .project-page-label {
+      min-width: 105px;
+      height: 40px;
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<div class="project-archive-page">
+  <div id="project-vanta-bg"></div>
+
+  <section class="project-archive-hero">
+    <div class="project-archive-hero-content">
+      <h1>My Projects</h1>
+      <p>
+        A collection of engineering, embedded systems, robotics, and software projects.
+        Each project page includes my design process, challenges, and what I learned.
+      </p>
+    </div>
+  </section>
+
+  <main class="project-archive-main">
+    <h2 class="project-archive-title">Project Archive</h2>
+
+    <div class="project-archive-filter-wrapper">
+      <div class="project-archive-filter-buttons">
+        {{ range $index, $button := $data.buttons }}
+          <button
+            class="project-archive-filter-btn {{ if eq $index 0 }}active{{ end }}"
+            data-filter="{{ $button.filter }}"
+          >
+            {{ $button.name }}
+          </button>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="project-archive-grid" id="project-archive-grid">
+      {{ range $index, $project := $data.projects }}
+        <article
+          class="project-archive-card"
+          data-categories="{{ delimit $project.tags "," }}"
+          data-index="{{ $index }}"
+        >
+          {{ if $project.page }}
+            <a class="project-archive-image-link" href="{{ $project.page }}">
+          {{ else }}
+            <div class="project-archive-image-link">
+          {{ end }}
+
+            {{ if $project.image }}
+              {{ $imgPath := strings.TrimPrefix "/" $project.image }}
+              {{ $imgPath = strings.TrimPrefix "assets/" $imgPath }}
+              {{ $img := resources.Get $imgPath }}
+
+              {{ if $img }}
+                <img class="project-archive-image" src="{{ $img.RelPermalink }}" alt="{{ $project.name }}">
+              {{ else }}
+                <img class="project-archive-image" src="{{ $project.image }}" alt="{{ $project.name }}">
+              {{ end }}
+            {{ end }}
+
+          {{ if $project.page }}
+            </a>
+          {{ else }}
+            </div>
+          {{ end }}
+
+          <div class="project-archive-card-body">
+            {{ if $project.page }}
+              <a class="project-archive-title-link" href="{{ $project.page }}">
+                <h3>{{ $project.name }}</h3>
+              </a>
+            {{ else }}
+              <div class="project-archive-title-link">
+                <h3>{{ $project.name }}</h3>
+              </div>
+            {{ end }}
+
+            <div class="project-archive-meta">
+              <span>{{ $project.role }}</span>
+              <span>{{ $project.timeline }}</span>
+            </div>
+
+            <p>{{ $project.summary | plainify }}</p>
+
+            {{ if $project.tags }}
+              <div class="project-archive-tags">
+                {{ range first 5 $project.tags }}
+                  <span>{{ . }}</span>
+                {{ end }}
+              </div>
+            {{ end }}
+
+            <div class="project-archive-actions">
+              {{ if $project.page }}
+                <a class="project-archive-action primary" href="{{ $project.page }}">
+                  View Details
+                </a>
+              {{ end }}
+
+              {{ if $project.repo }}
+                <a class="project-archive-action" href="{{ $project.repo }}" target="_blank" rel="noopener">
+                  GitHub
+                </a>
+              {{ end }}
+
+              {{ if $project.report }}
+                <a class="project-archive-action" href="{{ $project.report }}" target="_blank" rel="noopener">
+                  Technical Report
+                </a>
+              {{ else if $project.url }}
+                <a class="project-archive-action" href="{{ $project.url }}" target="_blank" rel="noopener">
+                  Technical Report
+                </a>
+              {{ end }}
+            </div>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+
+    <div class="project-archive-pagination">
+      <button id="projects-prev" class="project-page-btn">
+        ← Previous
+      </button>
+
+      <div id="projects-page-label" class="project-page-label">
+        Page 1 of 1
+      </div>
+
+      <button id="projects-next" class="project-page-btn">
+        Next →
+      </button>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = Array.from(document.querySelectorAll(".project-archive-card"));
+    const buttons = Array.from(document.querySelectorAll(".project-archive-filter-btn"));
+    const prevButton = document.getElementById("projects-prev");
+    const nextButton = document.getElementById("projects-next");
+    const pageLabel = document.getElementById("projects-page-label");
+
+    const pageSize = 6;
+    let currentFilter = "All";
+    let currentPage = 1;
+    let filteredCards = [];
+
+    function getCategories(card) {
+      return card.dataset.categories
+        ? card.dataset.categories.split(",").map(category => category.trim())
+        : [];
+    }
+
+    function getFilteredCards() {
+      return cards.filter(card => {
+        const categories = getCategories(card);
+        return currentFilter === "All" || categories.includes(currentFilter);
+      });
+    }
+
+    function renderProjects() {
+      filteredCards = getFilteredCards();
+
+      const totalPages = Math.max(1, Math.ceil(filteredCards.length / pageSize));
+
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      const visibleCards = filteredCards.slice(start, end);
+
+      cards.forEach(card => {
+        card.classList.remove("show");
+      });
+
+      visibleCards.forEach(card => {
+        card.classList.add("show");
+      });
+
+      pageLabel.textContent = `Page ${currentPage} of ${totalPages}`;
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = currentPage === totalPages;
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener("click", function () {
+        if (button.classList.contains("active")) return;
+
+        buttons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        currentFilter = button.dataset.filter;
+        currentPage = 1;
+        renderProjects();
+      });
+    });
+
+    prevButton.addEventListener("click", function () {
+      if (currentPage > 1) {
+        currentPage--;
+        renderProjects();
+      }
+    });
+
+    nextButton.addEventListener("click", function () {
+      const totalPages = Math.max(1, Math.ceil(filteredCards.length / pageSize));
+
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderProjects();
+      }
+    });
+
+    renderProjects();
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof VANTA !== "undefined") {
+      VANTA.GLOBE({
+        el: "#project-vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xbb131b,
+        size: 0.95,
+        backgroundColor: 0xf2f2f2
+      });
+    }
+  });
+</script>
+{{ end }}

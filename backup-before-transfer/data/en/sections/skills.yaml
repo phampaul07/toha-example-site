@@ -1,0 +1,92 @@
+# section information
+section:
+  name: Skills
+  id: skills
+  enable: true
+  weight: 4
+  showOnNavbar: true
+  filter: true
+  # Can optionally hide the title in sections
+  # hideTitle: true
+
+# filter buttons
+buttons:
+- name: All
+  filter: "All"
+- name: Language
+  filter: "Language"
+- name: Hardware & Embedded
+  filter: "Hardware"
+- name: Robotics & Control
+  filter: "Robotics"
+- name: Tools & Frameworks
+  filter: "Tools"
+
+# Your Skills.
+# Give a summary of you each skill in the summary section.
+skills:
+- name: MATLAB
+  logo: /images/sections/skills/matlab.png
+  summary: "Utilized for mathematical modeling, matrix computations, and simulating dynamic systems, including discrete-time state-space models for RLC circuits."
+  categories: ["Language", "Tools", "All"]
+
+- name: Python
+  logo: /images/sections/skills/python.png
+  summary: "Primary language used for rapid prototyping, algorithmic development, computer vision applications, and writing object-oriented robot manipulation scripts."
+  categories: ["Language", "All"]
+
+- name: Java
+  logo: /images/sections/skills/java.png
+  summary: "Experienced in object-oriented programming, data structures, and algorithmic problem-solving."
+  categories: ["Language", "All"]
+
+- name: Verilog
+  summary: "Hardware Description Language (HDL) used for modeling digital systems, implementing finite state machines, and synthesizing designs onto FPGA hardware."
+  categories: ["Hardware", "Language", "All"]
+
+# Hardware & Embedded
+- name: FPGA & RISC-V
+  summary: "Experienced in digital logic design, mapping hardware architectures, and exploring microprocessor foundations using the open RISC-V ISA on field-programmable arrays."
+  categories: ["Hardware", "All"]
+
+- name: CircuitPython
+  summary: "Leveraged for low-overhead hardware scripting on bare-metal microcontrollers, enabling rapid deployment of embedded software, direct GPIO pin manipulation, and sensor integration."
+  categories: ["Hardware"]
+
+- name: Raspberry Pi & ESP32
+  logo: /images/sections/skills/raspberry-pi.png
+  summary: "Prototyped embedded applications using Linux-based single-board computers and microcontrollers to manage hardware interrupts, Wi-Fi modules, and sensor arrays."
+  categories: ["Hardware", "All"]
+
+- name: Electrical Instrumentation & Soldering
+  summary: "Proficient in through-hole and surface-mount soldering techniques alongside hardware debugging tools including digital multimeters and oscilloscopes."
+  categories: ["Hardware", "All"]
+
+# Robotics & Control
+- name: Inverse Kinematics & Motion Planning
+  summary: "Implemented 2D and 3D inverse kinematics algorithms from first principles to calculate geometric joint configurations for multi-axis robotic arms."
+  categories: ["Robotics", "All"]
+
+- name: PID Control Loops
+  summary: "Designed and implemented closed-loop error correction systems to stabilize physical actuator positions, tune motor responses, and reduce physical overshoot."
+  categories: ["Robotics", "All"]
+
+- name: Computer Vision (OpenCV)
+  summary: "Utilized real-time image processing libraries for spatial analysis, object detection, and feature extraction to guide autonomous manipulator paths."
+  categories: ["Robotics", "Tools", "All"]
+
+# Tools & Frameworks
+- name: Git & GitHub
+  logo: /images/sections/skills/git.png
+  summary: "Utilized for source control management, codebase version tracking, collaborative development pipelines, and hosting project documentation."
+  categories: ["Tools", "All"]
+
+- name: Computer-Aided Design (CAD)
+  logo: /images/sections/skills/cad.png
+  summary: "Familiar with modeling 3D parts and physical component assemblies to map structural spatial constraints before moving to physical manufacturing."
+  categories: ["Tools", "All"]
+
+- name: Visual Studio Code
+  logo: /images/sections/skills/vscode.webp
+  summary: "Utilized as the primary Integrated Development Environment (IDE) for Python and C/C++ script development, version control integration, and embedded hardware flashing."
+  categories: ["Tools"]

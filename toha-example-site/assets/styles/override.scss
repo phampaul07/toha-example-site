@@ -2,3 +2,38 @@
     height: 200px !important; 
     object-fit: cover !important; 
 }
+
+footer,
+.footer,
+.footer-section {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer h5,
+footer h6,
+footer p,
+footer span,
+footer li,
+footer a,
+.footer h1,
+.footer h2,
+.footer h3,
+.footer h4,
+.footer h5,
+.footer h6,
+.footer p,
+.footer span,
+.footer li,
+.footer a {
+  color: #ffffff !important;
+}
+
+footer a:hover,
+.footer a:hover {
+  color: #fca5a5 !important;
+}

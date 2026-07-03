@@ -1,0 +1,198 @@
+{{ $author := (index site.Data site.Language.Lang).author }}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400&display=swap');
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  #home.custom-hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: #0a0a0c;
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* Soft overlay texture above Vanta */
+  #home.custom-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(120deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(60deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+    background-size: 42px 42px;
+    opacity: 0.18;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Kept in case you want to use custom canvas later */
+  #canvas-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Vanta inserts canvas directly into #home */
+  #home.custom-hero canvas {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    transform: translateY(-2.5rem);
+    position: relative;
+    z-index: 4;
+    pointer-events: auto;
+  }
+
+  .hero-avatar {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.72);
+    margin-bottom: 1.4rem;
+    background-color: #111;
+    box-shadow:
+      0 0 0 6px rgba(255, 255, 255, 0.08),
+      0 12px 35px rgba(0, 0, 0, 0.55);
+    display: block;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(3.2rem, 5.8vw, 5.4rem);
+    font-weight: 100;
+    letter-spacing: 0.035em;
+    margin: 0 0 1.5rem 0;
+    color: white;
+    line-height: 0.95;
+  }
+
+  .hero-links {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+  }
+
+  .hero-links a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    font-weight: 200;
+    transition: opacity 0.25s ease, color 0.25s ease;
+  }
+
+  .hero-links a:hover {
+    color: white;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      transform: translateY(-1.5rem);
+      padding: 0 1.5rem;
+    }
+
+    .hero-avatar {
+      width: 105px;
+      height: 105px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3.4rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-links {
+      gap: 1.1rem;
+    }
+  }
+</style>
+
+<div id="home" class="custom-hero">
+  <div id="canvas-container"></div>
+
+  <div class="hero-overlay">
+    <div class="hero-content">
+      {{ $avatar := resources.Get "images/author/headshot.jpeg" }}
+
+      {{ if $avatar }}
+        <img
+          class="hero-avatar"
+          src="{{ $avatar.RelPermalink }}"
+          alt="Paul Pham"
+        >
+      {{ else }}
+        <p style="color: red;">Avatar image not found.</p>
+      {{ end }}
+
+      <h1>{{ $author.name | default "Paul Pham" }}</h1>
+
+      <ul class="hero-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof VANTA !== "undefined") {
+      VANTA.BIRDS({
+        el: "#home",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        backgroundColor: 0x0a0a0c,
+        color1: 0xca1818,
+        color2: 0x000000,
+        colorMode: "lerpGradient",
+        birdSize: 1.10,
+        wingSpan: 23.00,
+        speedLimit: 3.00,
+        separation: 38.00,
+        cohesion: 41.00
+      });
+    }
+  });
+</script>
