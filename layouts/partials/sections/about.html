@@ -40,16 +40,25 @@
       </div>
 
       <div class="col-sm-12 col-md-6 col-lg-4 pt-4 pt-md-0 d-flex justify-content-center align-items-center about-image-column">
-        {{ if $about.profileImage }}
-          {{ $profileImg := resources.Get $about.profileImage }}
-          {{ if $profileImg }}
-            <img
-              src="{{ $profileImg.RelPermalink }}"
-              alt="Profile Image"
-              class="img-fluid rounded shadow"
-            >
-          {{ end }}
-        {{ end }}
+{{ if $about.profileImage }}
+  {{ $profilePath := strings.TrimPrefix "/" $about.profileImage }}
+  {{ $profilePath = strings.TrimPrefix "assets/" $profilePath }}
+  {{ $profileImg := resources.Get $profilePath }}
+
+  {{ if $profileImg }}
+    <img
+      src="{{ $profileImg.RelPermalink }}"
+      alt="Profile Image"
+      class="img-fluid rounded shadow"
+    >
+  {{ else }}
+    <img
+      src="{{ $about.profileImage }}"
+      alt="Profile Image"
+      class="img-fluid rounded shadow"
+    >
+  {{ end }}
+{{ end }}
       </div>
     </div>
   </div>
