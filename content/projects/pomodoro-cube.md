@@ -8,14 +8,6 @@ repo: https://github.com/phampaul07/pomodoro-cube.git
 summary: "A Pomodoro timer with a physical cube that can be rotated to start, pause, and reset the timer."
 ---
 
-<p align="center">
-  <img src="images/hero.gif" width="500">
-</p>
-
-<p align="center">
-CircuitPython • ESP32-C3 • Embedded Systems • CAD • 3D Printing • Analog Electronics • KiCad
-</p>
-
 ## Overview
 
 The Smart Pomodoro Cube is a handheld productivity device built from the ground up to explore embedded systems, custom electronics, and industrial design. It functions as a distraction-free Pomodoro timer driven entirely by its physical orientation. When placed on its custom magnetic pogo-pin dock, it transforms into an interactive hub featuring a virtual pet (Tamagotchi), productivity tracker, and digital clock.
@@ -27,6 +19,32 @@ Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circu
 - **Standalone Operation:** Features a real-time clock, orientation-based timer selection, countdown progress bar, and battery/temperature monitoring.
 - **Magnetic Charging Dock:** Enables cable-free charging via pogo pins and seamlessly transitions the cube into docked mode. 
 - **Interactive Dock Modes:** Unlocks a 15-minute quick timer, an interactive Tamagotchi pet (with petting animations), and long-term productivity statistics.
+
+## Demonstrations
+
+### Standalone Cube
+
+<p align="center">
+<a href="https://youtube.com/shorts/b-1S72bGzG8?feature=share">
+<img src="https://img.youtube.com/vi/b-1S72bGzG8/maxresdefault.jpg" width="700">
+</a>
+</p>
+
+<p align="center">
+<b>Click the thumbnail above to watch the standalone demonstration.</b>
+</p>
+
+### Interactive Charging Dock
+
+<p align="center">
+<a href="https://youtube.com/shorts/HYNcFR9NDS4?feature=share">
+<img src="https://img.youtube.com/vi/HYNcFR9NDS4/maxresdefault.jpg" width="700">
+</a>
+</p>
+
+<p align="center">
+<b>Click the thumbnail above to watch the dock demonstration.</b>
+</p>
 
 ## Engineering Highlights
 
@@ -65,5 +83,3 @@ The CircuitPython firmware is built on a memory-efficient Finite State Machine (
 | <img width="1911" height="2139" alt="front_pcb" src="https://github.com/user-attachments/assets/8b14f7b8-9f3f-4de5-b548-ce51dcfeb479" /> | <img width="3024" height="4032" alt="components" src="https://github.com/user-attachments/assets/bb55650d-d55b-4280-af41-0574d795a18d" />|
 
 ***
-
-**If you enjoyed this project, consider leaving a star on [GitHub](https://github.com/phampaul07/pomodoro-cube.git)!**
