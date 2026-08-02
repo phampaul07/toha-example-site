@@ -16,9 +16,9 @@ Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circu
 
 ## Key Features
 
-- Standalone Operation: Features a real-time clock, orientation-based timer selection, countdown progress bar, and battery/temperature monitoring.
-- Magnetic Charging Dock: Enables cable-free charging via pogo pins and seamlessly transitions the cube into docked mode. 
-- Interactive Dock Modes: Unlocks a 15-minute quick timer, an interactive Tamagotchi pet (with petting animations), and long-term productivity statistics.
+- **Standalone Operation:** Features a real-time clock, orientation-based timer selection, countdown progress bar, and battery/temperature monitoring.
+- **Magnetic Charging Dock:** Enables cable-free charging via pogo pins and seamlessly transitions the cube into docked mode. 
+- **Interactive Dock Modes:** Unlocks a 15-minute quick timer, an interactive Tamagotchi pet (with petting animations), and long-term productivity statistics.
 
 ### Demonstrations
 
@@ -30,7 +30,6 @@ Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circu
 </a>
 </p>
 
-
 ## Interactive Charging Dock
 
 <p align="center">
@@ -38,7 +37,6 @@ Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circu
 <img src="https://img.youtube.com/vi/HYNcFR9NDS4/maxresdefault.jpg" width="700">
 </a>
 </p>
-
 
 ### Engineering Highlights
 
@@ -53,27 +51,55 @@ The CircuitPython firmware is built on a memory-efficient Finite State Machine (
 
 ### Hardware & Tools
 
-- MCU & UI: Seeed Studio XIAO ESP32-C3, 1.28" Round GC9A01 IPS Display
-- Sensors: MPU6050 (Orientation Detection), External RTC Module
-- Power & Connectivity: 3.7V LiPo Battery, Magnetic Pogo Pins
-- Electronics:Custom KiCad PCB (Cube Mainboard), Custom Perfboard (Dock Circuitry)
+- **MCU & UI:** Seeed Studio XIAO ESP32-C3, 1.28" Round GC9A01 IPS Display
+- **Sensors:** MPU6050 (Orientation Detection), External RTC Module
+- **Power & Connectivity:** 3.7V LiPo Battery, Magnetic Pogo Pins
+- **Electronics:** Custom KiCad PCB (Cube Mainboard), Custom Perfboard (Dock Circuitry)
 
 ## Gallery
 
-| Cube | Dock |
-|------|------|
-| <img width="2217" height="2295" alt="IMG_2750" src="https://github.com/user-attachments/assets/47c5d93c-9311-4f70-925c-c8ca01058350" />| <img width="3024" height="4032" alt="IMG_2749" src="https://github.com/user-attachments/assets/2d7062d3-feac-4b3a-922d-83b6af8a94fb" /> |
+<div class="project-image-stack two-images">
+  <figure>
+    <img src="https://github.com/user-attachments/assets/47c5d93c-9311-4f70-925c-c8ca01058350" alt="Cube">
+    <figcaption>Cube</figcaption>
+  </figure>
+  <figure>
+    <img src="https://github.com/user-attachments/assets/2d7062d3-feac-4b3a-922d-83b6af8a94fb" alt="Dock">
+    <figcaption>Dock</figcaption>
+  </figure>
+</div>
 
-| Real-Time Clock | Iterated Timer |
-|------|------|
-|<img width="4032" height="3024" alt="IMG_2753" src="https://github.com/user-attachments/assets/7f6579c9-9c8a-4ac8-bc8b-8f16c355ab3e" /> | <img width="4032" height="3024" alt="IMG_2754" src="https://github.com/user-attachments/assets/7ebef5c4-1801-4718-a616-3413b40726a2" /> |
+<div class="project-image-stack two-images">
+  <figure>
+    <img src="https://github.com/user-attachments/assets/7f6579c9-9c8a-4ac8-bc8b-8f16c355ab3e" alt="Real-Time Clock">
+    <figcaption>Real-Time Clock</figcaption>
+  </figure>
+  <figure>
+    <img src="https://github.com/user-attachments/assets/7ebef5c4-1801-4718-a616-3413b40726a2" alt="Iterated Timer">
+    <figcaption>Iterated Timer</figcaption>
+  </figure>
+</div>
 
-| Tamagotchi | Stats |
-|------|------|
-|<img width="3024" height="4032" alt="IMG_2757" src="https://github.com/user-attachments/assets/083e92cf-9342-4e21-a807-ed936aab5156" /> |<img width="3024" height="4032" alt="IMG_2756" src="https://github.com/user-attachments/assets/bf3a9c01-6fa3-46c4-bbdb-243c60f5bd75" /> |
+<div class="project-image-stack two-images">
+  <figure>
+    <img src="https://github.com/user-attachments/assets/083e92cf-9342-4e21-a807-ed936aab5156" alt="Tamagotchi">
+    <figcaption>Tamagotchi</figcaption>
+  </figure>
+  <figure>
+    <img src="https://github.com/user-attachments/assets/bf3a9c01-6fa3-46c4-bbdb-243c60f5bd75" alt="Stats">
+    <figcaption>Stats</figcaption>
+  </figure>
+</div>
 
-| PCB | Wiring |
-|------|------|
-| <img width="1911" height="2139" alt="front_pcb" src="https://github.com/user-attachments/assets/8b14f7b8-9f3f-4de5-b548-ce51dcfeb479" /> | <img width="3024" height="4032" alt="components" src="https://github.com/user-attachments/assets/bb55650d-d55b-4280-af41-0574d795a18d" />|
+<div class="project-image-stack two-images">
+  <figure>
+    <img src="https://github.com/user-attachments/assets/8b14f7b8-9f3f-4de5-b548-ce51dcfeb479" alt="PCB">
+    <figcaption>PCB</figcaption>
+  </figure>
+  <figure>
+    <img src="https://github.com/user-attachments/assets/bb55650d-d55b-4280-af41-0574d795a18d" alt="Wiring">
+    <figcaption>Wiring</figcaption>
+  </figure>
+</div>
 
 ***
