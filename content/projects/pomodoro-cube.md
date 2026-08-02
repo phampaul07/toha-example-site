@@ -16,12 +16,12 @@ Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circu
 
 ## Key Features
 
-- **Standalone Operation:** Features a real-time clock, orientation-based timer selection, countdown progress bar, and battery/temperature monitoring.
-- **Magnetic Charging Dock:** Enables cable-free charging via pogo pins and seamlessly transitions the cube into docked mode. 
-- **Interactive Dock Modes:** Unlocks a 15-minute quick timer, an interactive Tamagotchi pet (with petting animations), and long-term productivity statistics.
+- Standalone Operation: Features a real-time clock, orientation-based timer selection, countdown progress bar, and battery/temperature monitoring.
+- Magnetic Charging Dock: Enables cable-free charging via pogo pins and seamlessly transitions the cube into docked mode. 
+- Interactive Dock Modes: Unlocks a 15-minute quick timer, an interactive Tamagotchi pet (with petting animations), and long-term productivity statistics.
+
 
 ### Demonstrations
-
 ## Standalone Cube
 
 <p align="center">
@@ -51,10 +51,10 @@ The CircuitPython firmware is built on a memory-efficient Finite State Machine (
 
 ### Hardware & Tools
 
-- **MCU & UI:** Seeed Studio XIAO ESP32-C3, 1.28" Round GC9A01 IPS Display
-- **Sensors:** MPU6050 (Orientation Detection), External RTC Module
-- **Power & Connectivity:** 3.7V LiPo Battery, Magnetic Pogo Pins
-- **Electronics:** Custom KiCad PCB (Cube Mainboard), Custom Perfboard (Dock Circuitry)
+- MCU & UI: Seeed Studio XIAO ESP32-C3, 1.28" Round GC9A01 IPS Display
+- Sensors: MPU6050 (Orientation Detection), External RTC Module
+- Power & Connectivity: 3.7V LiPo Battery, Magnetic Pogo Pins
+- Electronics: Custom KiCad PCB (Cube Mainboard), Custom Perfboard (Dock Circuitry)
 
 ## Gallery
 
