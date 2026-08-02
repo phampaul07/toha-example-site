@@ -16,13 +16,13 @@ Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circu
 
 ## Key Features
 
-- **Standalone Operation:** Features a real-time clock, orientation-based timer selection, countdown progress bar, and battery/temperature monitoring.
-- **Magnetic Charging Dock:** Enables cable-free charging via pogo pins and seamlessly transitions the cube into docked mode. 
-- **Interactive Dock Modes:** Unlocks a 15-minute quick timer, an interactive Tamagotchi pet (with petting animations), and long-term productivity statistics.
+- Standalone Operation: Features a real-time clock, orientation-based timer selection, countdown progress bar, and battery/temperature monitoring.
+- Magnetic Charging Dock: Enables cable-free charging via pogo pins and seamlessly transitions the cube into docked mode. 
+- Interactive Dock Modes: Unlocks a 15-minute quick timer, an interactive Tamagotchi pet (with petting animations), and long-term productivity statistics.
 
-## Demonstrations
+### Demonstrations
 
-### Standalone Cube
+## Standalone Cube
 
 <p align="center">
 <a href="https://youtube.com/shorts/b-1S72bGzG8?feature=share">
@@ -30,11 +30,8 @@ Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circu
 </a>
 </p>
 
-<p align="center">
-<b>Click the thumbnail above to watch the standalone demonstration.</b>
-</p>
 
-### Interactive Charging Dock
+## Interactive Charging Dock
 
 <p align="center">
 <a href="https://youtube.com/shorts/HYNcFR9NDS4?feature=share">
@@ -42,27 +39,24 @@ Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circu
 </a>
 </p>
 
-<p align="center">
-<b>Click the thumbnail above to watch the dock demonstration.</b>
-</p>
 
-## Engineering Highlights
+### Engineering Highlights
 
-### Analog Button Multiplexing
+## Analog Button Multiplexing
 Because the magnetic pogo-pin interface is strictly limited to four physical connections (5V, GND, 3.3V, Data), it was impossible to dedicate separate GPIO pins to the four dock buttons. To solve this, I engineered a resistor ladder that multiplexes all four buttons into a single analog data line, using distinct voltage thresholds to determine which button was pressed.
 
-### Safe Battery Monitoring
+## Safe Battery Monitoring
 To accurately read the 3.7V LiPo battery (which peaks at 4.2V, exceeding the ESP32's safe limits), I implemented a hardware voltage divider. It steps the voltage down by half before reaching the ADC, allowing software to accurately calculate the remaining battery percentage without hardware damage.
 
-### State-Machine Architecture
+## State-Machine Architecture
 The CircuitPython firmware is built on a memory-efficient Finite State Machine (FSM), cleanly separating the standalone logic (Clock/Timer) from the docked logic (Tamagotchi/Stats) to prevent memory fragmentation and ensure smooth sprite animations.
 
-## Hardware & Tools
+### Hardware & Tools
 
-- **MCU & UI:** Seeed Studio XIAO ESP32-C3, 1.28" Round GC9A01 IPS Display
-- **Sensors:** MPU6050 (Orientation Detection), External RTC Module
-- **Power & Connectivity:** 3.7V LiPo Battery, Magnetic Pogo Pins
-- **Electronics:** Custom KiCad PCB (Cube Mainboard), Custom Perfboard (Dock Circuitry)
+- MCU & UI: Seeed Studio XIAO ESP32-C3, 1.28" Round GC9A01 IPS Display
+- Sensors: MPU6050 (Orientation Detection), External RTC Module
+- Power & Connectivity: 3.7V LiPo Battery, Magnetic Pogo Pins
+- Electronics:Custom KiCad PCB (Cube Mainboard), Custom Perfboard (Dock Circuitry)
 
 ## Gallery
 
