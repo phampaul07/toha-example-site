@@ -4,7 +4,7 @@ type: "projects"
 layout: "single"
 role: Developer
 timeline: "May 2026"
-repo: https://github.com/phampaul07/Simon-Says
+repo: https://github.com/phampaul07/Simon_Says
 summary: "A Simon Says sequence game on an FPGA using Verilog based on behavioral modeling."
 ---
 
