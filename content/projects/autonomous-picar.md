@@ -11,29 +11,35 @@ summary: "An autonomous Raspberry Pi-based vehicle featuring real-time PID motor
 
 ## Overview
 
-The Autonomous PiCar is a Raspberry Pi-controlled vehicle designed to drive, track objects, recognize traffic-light colors, and maintain stable speed using closed-loop control. The project combined motor characterization, PID tuning, computer vision, ultrasonic distance sensing, and accelerometer-based steering correction into one autonomous system.
+The Autonomous PiCar is a Raspberry Pi-controlled vehicle that drives, tracks objects, recognizes traffic-light colors, and holds a stable speed under closed-loop control — combining motor characterization, PID tuning, computer vision, ultrasonic sensing, and accelerometer-based steering correction into one autonomous system.
 
-## Key Features
+---
 
-- Tuned a PID controller for real-time motor speed control using rotational speed feedback.
-- Used OpenCV and HSV color masking to detect blue targets and simulated traffic-light colors.
-- Integrated ultrasonic sensing for distance-based braking and collision prevention.
-- Used accelerometer/gyroscope data to help the vehicle maintain a straight heading.
-- Implemented multiple autonomous behaviors: target seeking, traffic-light response, and hallway cruise control.
+## Highlights
 
-## Motor Control and PID Tuning
+- **PID motor control:** characterized the PiCar's open-loop motor behavior (PWM duty cycle to rotational speed), built a feedforward baseline, then tuned proportional and integral gains separately for suspended-wheel testing and ground driving — ground driving required more aggressive gains to overcome rolling resistance and static friction.
+- **Vision-guided target seeking:** RGB frames from the Pi Camera are converted to HSV and filtered into binary masks to isolate a blue target, calculate its center of mass, and steer toward it in real time.
+- **Traffic-light-responsive driving:** separate HSV masks detect red, yellow, and green, driving distinct behaviors (continue / slow down / stop), backed by an emergency-stop distance threshold regardless of detected color.
+- **Sensor fusion for stability:** ultrasonic distance sensing handles collision-avoidance braking, while accelerometer/gyroscope data corrects heading drift to keep the vehicle driving straight.
 
-I first characterized the PiCar’s open-loop motor behavior by mapping PWM duty cycle to rotational speed. From this, I estimated the motor response and developed a feedforward baseline before tuning the PID controller.
+---
 
-The final controller reduced steady-state error and stabilized the vehicle under different physical conditions, including both suspended-wheel testing and ground-driving conditions. Ground driving required more aggressive proportional and integral gains because of rolling resistance and static friction.
+## Future Improvements
 
-## Computer Vision Pipeline
+Although the current prototype is fully functional, there are several improvements I would like to explore.
 
-For object tracking and traffic-light recognition, I used the Pi Camera with OpenCV. Captured RGB frames were converted into HSV color space, then filtered using binary masks to isolate target colors.
+- More robust frame-handling to fully eliminate dropped-frame stalls under real-time load
+- Adaptive HSV thresholding that self-corrects for changing lighting instead of fixed bounds
+- Closed-loop speed control that reacts to terrain changes mid-drive, not just at calibration
+- Combining ultrasonic and vision data for earlier obstacle detection instead of treating them as separate systems
 
-### Blue Target Detection
+**What I Learned:** This project showed me how tightly control systems and computer vision have to work together in a real autonomous system — tuning PID gains, filtering noisy sensor data, and building reliable OpenCV masks all had to hold up simultaneously, not just individually, for the car to behave predictably.
 
-The PiCar used a blue-object mask to locate a target, calculate its center of mass, and adjust steering toward the object.
+---
+
+## Demonstrations
+
+### Target Seeking
 
 <div class="project-image-stack two-images">
   <figure>
@@ -55,14 +61,7 @@ The PiCar used a blue-object mask to locate a target, calculate its center of ma
   <p class="project-video-caption">Autonomous target-seeking demonstration.</p>
 </div>
 
-## Traffic Light Recognition
-
-For the traffic-light objective, the system detected red, yellow, and green circles using separate HSV masks. The detected color controlled the vehicle’s behavior:
-
-- Green: continue driving
-- Yellow: slow down
-- Red: stop
-- Emergency threshold: stop if too close, regardless of detected color
+### Traffic Light Recognition
 
 <div class="project-image-stack four-images">
   <figure>
@@ -94,16 +93,4 @@ For the traffic-light objective, the system detected red, yellow, and green circ
   <p class="project-video-caption">Traffic-light response demonstration.</p>
 </div>
 
-## Challenges
-
-One major challenge was handling inconsistent camera frames during real-time operation. The control loop sometimes ran faster than the Pi Camera could provide updated frames, so I added safer image-handling logic to prevent dropped frames from crashing the system.
-
-Another challenge was tuning HSV thresholds under changing lighting. The printed green and yellow targets were affected by shadows, glare, and camera exposure, so I adjusted the HSV bounds to improve detection reliability.
-
-## Results
-
-The PiCar successfully demonstrated autonomous navigation behaviors using a combination of PID control and sensor feedback. It was able to track a colored object, respond to traffic-light colors, maintain controlled speed, and use sensor data to make driving decisions in real time.
-
-## What I Learned
-
-This project helped me understand how control systems and computer vision interact in real autonomous systems. I learned how to tune PID parameters, process noisy sensor data, build reliable OpenCV masks, and design state-based autonomous behavior for a physical robot.
+***
