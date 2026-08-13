@@ -47,8 +47,8 @@ projects:
   page: /projects/simon-says/
   repo: https://github.com/phampaul07/Simon_Says
   #url: ""
-  summary: A Simon Says sequence game on an FPGA using Verilog based on behavioral modeling.
-  tags: ["All", "Academic", "Verilog", "FPGA", "Digital Design", "Finite State Machines"]
+  summary: A Simon Says sequence game on an FPGA using SystemVerilog based on behavioral modeling.
+  tags: ["All", "Academic", "SystemVerilog", "FPGA", "Digital Design", "Finite State Machines"]
 
 - name: Autonomous PiCar
   image: /images/sections/projects/picar.jpeg

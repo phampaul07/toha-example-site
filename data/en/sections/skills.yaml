@@ -40,7 +40,7 @@ skills:
   summary: "Experienced in object-oriented programming, data structures, and algorithmic problem-solving."
   categories: ["Language", "All"]
 
-- name: Verilog
+- name: SystemVerilog
   summary: "Hardware Description Language (HDL) used for modeling digital systems, implementing finite state machines, and synthesizing designs onto FPGA hardware."
   categories: ["Hardware", "Language", "All"]
 
