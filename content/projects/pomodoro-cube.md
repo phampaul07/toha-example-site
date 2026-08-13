@@ -10,16 +10,23 @@ summary: "A Pomodoro timer with a physical cube that can be rotated to start, pa
 
 ## Overview
 
-A handheld Pomodoro timer built into the size and shape of a Rubik's Cube. Rotate it to start, pause, and reset a session — no screen taps, no buttons, just orientation. Drop it on its magnetic dock and it becomes a small desk companion: a digital clock, a Tamagotchi-style pet, and a productivity tracker.
+The Pomodoro Cube is a handheld productivity device engineered to fit entirely within the footprint of a standard Rubik's Cube. Rather than relying on a touchscreen or physical buttons for its primary interface, the device uses orientation as its main input: rotating the cube selects, starts, pauses, and resets a Pomodoro session. When placed on its custom magnetic charging dock, the device transitions into an expanded mode that adds a digital clock, a Tamagotchi-style virtual pet, and a running log of focus statistics.
 
-Every part — the custom KiCad PCB, the 3D-printed enclosure, the analog circuitry, and the CircuitPython firmware — had to fit inside the cube's volume.
+Every subsystem — the custom KiCad PCB, the 3D-printed enclosure, the analog signal circuitry, and the CircuitPython firmware — was designed under the constraint of fitting inside the cube's volume, which shaped nearly every hardware decision on the project.
 
 ## Highlights
 
-- **Zero-button standalone mode:** timer selection, countdown, and battery/temp readout driven entirely by physical orientation.
-- **Analog button multiplexing:** the magnetic dock interface only exposes 4 physical connections, so a resistor-ladder circuit reads 4 dock buttons off a single analog pin using distinct voltage thresholds.
-- **Safe battery monitoring:** a voltage divider steps the 4.2V LiPo peak down to keep it inside the ESP32's ADC range.
-- **State-machine firmware:** standalone and docked modes run as separate states, keeping memory stable and pet/stat animations smooth.
+- **Zero-button standalone mode:** orientation sensing via an onboard MPU6050 drives timer selection and countdown, paired with a real-time clock and live battery/temperature readout, so the device runs entirely without physical buttons.
+- **Analog button multiplexing:** the magnetic dock interface exposes only four physical contacts (5V, GND, 3.3V, Data), which ruled out dedicating a separate GPIO pin to each of the four dock buttons. I designed a resistor-ladder network that maps each button to a distinct voltage threshold, allowing all four to be read reliably from a single analog input.
+- **Safe battery monitoring:** a hardware voltage divider steps the LiPo battery's 4.2V peak down to a level safe for the ESP32's ADC, letting the firmware calculate remaining battery percentage without risking damage to the microcontroller.
+- **State-machine firmware architecture:** the CircuitPython firmware is structured as a memory-efficient finite state machine that cleanly separates standalone logic (clock/timer) from docked logic (Tamagotchi/stats), preventing memory fragmentation and keeping sprite animations smooth.
+
+## Future Improvements
+
+- Bluetooth sync to export focus history to a companion phone app
+- Weekly and monthly trend views for productivity statistics, beyond the current daily tracker
+- A slimmer dock profile to reduce the device's charging footprint
+- Haptic feedback on session transitions (start/pause/complete)
 
 ### Demonstrations
 
