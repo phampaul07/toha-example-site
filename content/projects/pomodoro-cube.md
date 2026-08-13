@@ -41,21 +41,21 @@ Although the current prototype is fully functional, there are several improvemen
 
 ### Demonstrations
 
-## Standalone Cube
+<div class="project-video-block">
+  <video controls preload="metadata" playsinline>
+    <source src="/images/projects/pomodoro-cube/standalone.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p class="project-video-caption">Standalone Cube demonstration.</p>
+</div>
 
-<p align="center">
-<a href="https://youtube.com/shorts/b-1S72bGzG8?feature=share">
-<img src="https://img.youtube.com/vi/b-1S72bGzG8/maxresdefault.jpg" width="700">
-</a>
-</p>
-
-## Interactive Charging Dock
-
-<p align="center">
-<a href="https://youtube.com/shorts/HYNcFR9NDS4?feature=share">
-<img src="https://img.youtube.com/vi/HYNcFR9NDS4/maxresdefault.jpg" width="700">
-</a>
-</p>
+<div class="project-video-block">
+  <video controls preload="metadata" playsinline>
+    <source src="/images/projects/pomodoro-cube/dock.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p class="project-video-caption">Interactive Charging Dock demonstration.</p>
+</div>
 
 ---
 
