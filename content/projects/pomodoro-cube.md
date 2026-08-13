@@ -10,14 +10,15 @@ summary: "A Pomodoro timer with a physical cube that can be rotated to start, pa
 
 ## Overview
 
-The Pomodoro Cube is a handheld productivity device engineered to fit entirely within the footprint of a standard Rubik's Cube. Rather than relying on a touchscreen or physical buttons for its primary interface, the device uses orientation as its main input: rotating the cube selects, starts, pauses, and resets a Pomodoro session. When placed on its custom magnetic charging dock, the device transitions into an expanded mode that adds a digital clock, a Tamagotchi-style virtual pet, and a running log of focus statistics.
+The Pomodoro Cube is a handheld productivity device engineered to fit entirely within the dimensions of a standard Rubik's Cube. Rather than relying on a touchscreen or physical buttons for its primary interface, the device uses orientation as its main input: rotating the cube selects, starts, pauses, and resets a Pomodoro session. When placed on its custom magnetic charging dock, the device transitions into an expanded mode that adds a digital clock, a Tamagotchi-style virtual pet, and a running log of focus statistics.
 
-Every subsystem — the custom KiCad PCB, the 3D-printed enclosure, the analog signal circuitry, and the CircuitPython firmware — was designed under the constraint of fitting inside the cube's volume, which shaped nearly every hardware decision on the project.
+Every subsystem — the CAD-designed cube enclosure and charging dock, the custom KiCad PCB, the analog signal circuitry, and the CircuitPython firmware — was designed under the constraint of fitting within those dimensions, which shaped nearly every hardware decision on the project.
 
 ---
 
 ## Highlights
 
+- **CAD-designed enclosure and dock:** modeled the cube's shell and its magnetic charging dock from scratch in CAD, iterating the internal layout until the battery, PCB, display, and sensors all fit within the target dimensions.
 - **Zero-button standalone mode:** orientation sensing via an onboard MPU6050 drives timer selection and countdown, paired with a real-time clock and live battery/temperature readout, so the device runs entirely without physical buttons.
 - **Analog button multiplexing:** the magnetic dock interface exposes only four physical contacts (5V, GND, 3.3V, Data), which ruled out dedicating a separate GPIO pin to each of the four dock buttons. I designed a resistor-ladder network that maps each button to a distinct voltage threshold, allowing all four to be read reliably from a single analog input.
 - **Safe battery monitoring:** a hardware voltage divider steps the LiPo battery's 4.2V peak down to a level safe for the ESP32's ADC, letting the firmware calculate remaining battery percentage without risking damage to the microcontroller.
@@ -36,6 +37,12 @@ Although the current prototype is fully functional, there are several improvemen
 - Improved charging dock alignment
 - Historical productivity graphs
 - Rotating screen animation to make the interface fixed
+
+## What I Learned
+
+- **Soldering fine-pitch components:** hand-soldering small capacitors and resistors taught me the precision needed for clean, reliable connections at this scale.
+- **Custom PCB design:** took the cube's mainboard from schematic through a fully routed layout in KiCad, working within the tight space constraints of the enclosure.
+- **Constraint-driven engineering:** fitting an entire product within the dimensions of a Rubik's Cube forced better decisions everywhere else, from analog signal multiplexing to memory-conscious firmware design.
 
 ---
 

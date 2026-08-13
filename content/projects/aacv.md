@@ -42,6 +42,12 @@ Although the current prototype is fully functional, there are several improvemen
 - Add a post-placement verification pass using the camera.
 - Add collision/reachability checks before committing to a pick or place command.
 
+## What I Learned
+
+- **Inverse kinematics:** learned to derive and implement the six-joint solver that converts a target position into the servo angles the arm needs to reach it.
+- **Vision logic:** built the OpenCV/ArUco-based perception pipeline end to end — HSV segmentation, homography correction, and coordinate mapping — that turns a raw camera frame into a usable real-world position.
+- **System integration:** reinforced how much of a vision-driven robotics system's overall reliability comes from calibration and error correction tying vision and motion planning together, not from either piece alone.
+
 ---
 
 ## Gallery
