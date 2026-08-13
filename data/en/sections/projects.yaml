@@ -23,7 +23,7 @@ projects:
   image: /images/sections/projects/pomodoro.png
   role: Developer
   featured: true
-  timeline: "June 2026 - Present"
+  timeline: "June 2026 - August 2026"
   page: /projects/pomodoro-cube/
   repo: https://github.com/phampaul07/pomodoro-cube.git
   summary: A Pomodoro timer with a physical cube that can be rotated to start, pause, and reset the timer.
@@ -33,11 +33,11 @@ projects:
   image: /images/sections/projects/aacv.png
   role: Co-Developer
   featured: true
-  timeline: "June 2026 - Present"
+  timeline: "June 2026 - August 2026"
   repo: https://github.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision.git
   page: /projects/aacv/
   #url: ""
-  summary: An autonomous 6-DOF robotic arm that uses computer vision to detect and sort objects into designated bins. 
+  summary: An autonomous 6-DOF robotic arm that uses computer vision to detect and sort objects into designated markers. 
   tags: ["All", "Personal", "Python", "Computer Vision", "3D Modeling", "OpenCV"]
 
 - name: FPGA-based Simon Says Game

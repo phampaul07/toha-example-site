@@ -5,7 +5,7 @@ layout: "single"
 role: "Co-Developer"
 timeline: "June 2026 - August 2026"
 repo: https://github.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision.git
-summary: "An autonomous 6-DOF robotic arm that uses computer vision to detect and sort objects into designated bins."
+summary: "An autonomous 6-DOF robotic arm that uses computer vision to detect and sort objects into designated markers."
 ---
 
 <div class="project-video-block">
