@@ -62,6 +62,10 @@ skills:
   summary: "Proficient in through-hole and surface-mount soldering techniques alongside hardware debugging tools including digital multimeters and oscilloscopes."
   categories: ["Hardware", "All"]
 
+- name: KiCad
+  summary: "Proficient in drawing up complete schematics, designing custom PCBs from scratch, and routing clean copper traces, from initial layout through a fabrication-ready board."
+  categories: ["Hardware", "All"]
+
 # Robotics & Control
 - name: Inverse Kinematics & Motion Planning
   summary: "Implemented 2D and 3D inverse kinematics algorithms from first principles to calculate geometric joint configurations for multi-axis robotic arms."
