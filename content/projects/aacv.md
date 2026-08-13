@@ -8,9 +8,19 @@ repo: https://github.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision.g
 summary: "An autonomous 6-DOF robotic arm that uses computer vision to detect and sort objects into designated bins."
 ---
 
+<div class="project-video-block">
+  <video controls preload="metadata" playsinline>
+    <source src="/images/projects/aacv/aacv_demo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p class="project-video-caption">AACV autonomous cube-sorting demonstration.</p>
+</div>
+
 ## Overview
 
 AACV is a six-degree-of-freedom robotic arm system capable of autonomously detecting, localizing, and manipulating colored cubes without any manual control or pre-programmed motion paths. An overhead camera continuously observes the workspace; computer vision converts what it sees into real-world coordinates, and those coordinates drive an inverse-kinematics solver that plans and executes the arm's pickup and placement motions in real time. The system was co-developed with Cole Burton.
+
+---
 
 ## Highlights
 
@@ -19,36 +29,53 @@ AACV is a six-degree-of-freedom robotic arm system capable of autonomously detec
 - **Two operating modes:** rainbow-order cube stacking, a fixed sequencing task, and color-to-marker target matching, a decision-driven placement task — demonstrating the system across two distinct classes of manipulation problems.
 - **Two-layer calibration:** per-servo angle-to-command mapping corrects for mechanical mounting offsets, while a 3x3 interpolated workspace correction grid measures and compensates for positioning error across the arm's full reachable area, keeping placement accuracy consistent rather than only correct at a few reference points.
 
+---
+
 ## Future Improvements
 
-- Multi-frame temporal averaging to reduce color-detection noise under variable or warm lighting, building on the current single-frame pipeline
-- Expanding color/object detection beyond the current primary-color set
-- Closed-loop visual feedback during the placement motion itself, rather than only before it begins
-- Evaluating a depth camera to make localization more robust to lighting conditions independent of color segmentation
+Although the current prototype is fully functional, there are several improvements I would like to explore.
+
+- Multi-frame averaging/tracking for cube position to reduce vision noise.
+- Re-calibrate the 3×3 correction grid after any physical change (new camera position, new mat, moving to different hardware) — current values are specific to the exact setup they were measured on.
+- Replace the fixed placement biases with additional measured calibration points instead of hand-tuned constants.
+- Tune HSV thresholds under the final, permanent lighting setup rather than whatever was available during development.
+- Add a post-placement verification pass using the camera.
+- Add collision/reachability checks before committing to a pick or place command.
+
+---
 
 ## Gallery
 
-*Placeholder images below — swap in build/demo photos once available.*
-
 <div class="project-image-stack two-images">
   <figure>
-    <img src="https://placehold.co/640x400/0d0d0d/ffffff?text=Arm+Overview" alt="Arm Overview (placeholder)">
-    <figcaption>Arm Overview</figcaption>
+    <img src="https://raw.githubusercontent.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision/main/docs/images/hardware_camera_rig.jpg" alt="Overhead Camera Rig">
+    <figcaption>Overhead Camera Rig</figcaption>
   </figure>
   <figure>
-    <img src="https://placehold.co/640x400/0d0d0d/ffffff?text=Vision+Pipeline" alt="Vision Pipeline (placeholder)">
-    <figcaption>Vision Pipeline / ArUco Detection</figcaption>
+    <img src="https://raw.githubusercontent.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision/main/docs/images/hardware_camera_mount.jpg" alt="Camera Mount">
+    <figcaption>Camera Mount</figcaption>
   </figure>
 </div>
 
 <div class="project-image-stack two-images">
   <figure>
-    <img src="https://placehold.co/640x400/0d0d0d/ffffff?text=Cube+Stacking+Demo" alt="Cube Stacking Demo (placeholder)">
-    <figcaption>Rainbow-Order Cube Stacking</figcaption>
+    <img src="https://raw.githubusercontent.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision/main/docs/images/hardware_camera_closeup.jpg" alt="Camera Closeup">
+    <figcaption>Camera Closeup</figcaption>
   </figure>
   <figure>
-    <img src="https://placehold.co/640x400/0d0d0d/ffffff?text=Calibration+Grid" alt="Calibration Grid (placeholder)">
-    <figcaption>Workspace Calibration Grid</figcaption>
+    <img src="https://raw.githubusercontent.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision/main/docs/images/hardware_servo_bus.jpg" alt="Servo Bus">
+    <figcaption>Servo Bus</figcaption>
+  </figure>
+</div>
+
+<div class="project-image-stack two-images">
+  <figure>
+    <img src="https://raw.githubusercontent.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision/main/docs/images/hardware_cubes_markers.jpg" alt="Cubes and ArUco Markers">
+    <figcaption>Cubes &amp; ArUco Markers</figcaption>
+  </figure>
+  <figure>
+    <img src="https://raw.githubusercontent.com/phampaul07/AACV---Autonomous-Arm-with-Computer-Vision/main/docs/images/calibration_grid_board.jpg" alt="Calibration Grid Board">
+    <figcaption>Calibration Grid Board</figcaption>
   </figure>
 </div>
 

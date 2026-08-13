@@ -14,6 +14,8 @@ The Pomodoro Cube is a handheld productivity device engineered to fit entirely w
 
 Every subsystem — the custom KiCad PCB, the 3D-printed enclosure, the analog signal circuitry, and the CircuitPython firmware — was designed under the constraint of fitting inside the cube's volume, which shaped nearly every hardware decision on the project.
 
+---
+
 ## Highlights
 
 - **Zero-button standalone mode:** orientation sensing via an onboard MPU6050 drives timer selection and countdown, paired with a real-time clock and live battery/temperature readout, so the device runs entirely without physical buttons.
@@ -21,12 +23,21 @@ Every subsystem — the custom KiCad PCB, the 3D-printed enclosure, the analog s
 - **Safe battery monitoring:** a hardware voltage divider steps the LiPo battery's 4.2V peak down to a level safe for the ESP32's ADC, letting the firmware calculate remaining battery percentage without risking damage to the microcontroller.
 - **State-machine firmware architecture:** the CircuitPython firmware is structured as a memory-efficient finite state machine that cleanly separates standalone logic (clock/timer) from docked logic (Tamagotchi/stats), preventing memory fragmentation and keeping sprite animations smooth.
 
+---
+
 ## Future Improvements
 
-- Bluetooth sync to export focus history to a companion phone app
-- Weekly and monthly trend views for productivity statistics, beyond the current daily tracker
-- A slimmer dock profile to reduce the device's charging footprint
-- Haptic feedback on session transitions (start/pause/complete)
+Although the current prototype is fully functional, there are several improvements I would like to explore.
+
+- Custom PCB for the charging dock to replace the perfboard prototype
+- Improved magnetic charging reliability
+- Lower-power sleep mode
+- Configurable timer durations
+- Improved charging dock alignment
+- Historical productivity graphs
+- Rotating screen animation to make the interface fixed
+
+---
 
 ### Demonstrations
 
@@ -45,6 +56,8 @@ Every subsystem — the custom KiCad PCB, the 3D-printed enclosure, the analog s
 <img src="https://img.youtube.com/vi/HYNcFR9NDS4/maxresdefault.jpg" width="700">
 </a>
 </p>
+
+---
 
 ## Gallery
 
