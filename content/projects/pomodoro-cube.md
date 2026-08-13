@@ -3,25 +3,26 @@ title: "Pomodoro Cube"
 type: "projects"
 layout: "single"
 role: "Developer"
-timeline: "June 2026 - Present"
+timeline: "June 2026 - August 2026"
 repo: https://github.com/phampaul07/pomodoro-cube.git
 summary: "A Pomodoro timer with a physical cube that can be rotated to start, pause, and reset the timer."
 ---
 
 ## Overview
 
-The Smart Pomodoro Cube is a handheld productivity device built from the ground up to explore embedded systems, custom electronics, and industrial design. It functions as a distraction-free Pomodoro timer driven entirely by its physical orientation. When placed on its custom magnetic pogo-pin dock, it transforms into an interactive hub featuring a virtual pet (Tamagotchi), productivity tracker, and digital clock.
+A handheld Pomodoro timer built into the size and shape of a Rubik's Cube. Rotate it to start, pause, and reset a session — no screen taps, no buttons, just orientation. Drop it on its magnetic dock and it becomes a small desk companion: a digital clock, a Tamagotchi-style pet, and a productivity tracker.
 
-Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circuitry, and the CircuitPython firmware—was specifically designed to fit inside the highly constrained volume of a standard Rubik's Cube.
+Every part — the custom KiCad PCB, the 3D-printed enclosure, the analog circuitry, and the CircuitPython firmware — had to fit inside the cube's volume.
 
-## Key Features
+## Highlights
 
-- Standalone Operation: Features a real-time clock, orientation-based timer selection, countdown progress bar, and battery/temperature monitoring.
-- Magnetic Charging Dock: Enables cable-free charging via pogo pins and seamlessly transitions the cube into docked mode. 
-- Interactive Dock Modes: Unlocks a 15-minute quick timer, an interactive Tamagotchi pet (with petting animations), and long-term productivity statistics.
-
+- **Zero-button standalone mode:** timer selection, countdown, and battery/temp readout driven entirely by physical orientation.
+- **Analog button multiplexing:** the magnetic dock interface only exposes 4 physical connections, so a resistor-ladder circuit reads 4 dock buttons off a single analog pin using distinct voltage thresholds.
+- **Safe battery monitoring:** a voltage divider steps the 4.2V LiPo peak down to keep it inside the ESP32's ADC range.
+- **State-machine firmware:** standalone and docked modes run as separate states, keeping memory stable and pet/stat animations smooth.
 
 ### Demonstrations
+
 ## Standalone Cube
 
 <p align="center">
@@ -37,24 +38,6 @@ Every element—the custom KiCad PCB, the 3D-printed enclosure, the analog circu
 <img src="https://img.youtube.com/vi/HYNcFR9NDS4/maxresdefault.jpg" width="700">
 </a>
 </p>
-
-### Engineering Highlights
-
-## Analog Button Multiplexing
-Because the magnetic pogo-pin interface is strictly limited to four physical connections (5V, GND, 3.3V, Data), it was impossible to dedicate separate GPIO pins to the four dock buttons. To solve this, I engineered a resistor ladder that multiplexes all four buttons into a single analog data line, using distinct voltage thresholds to determine which button was pressed.
-
-## Safe Battery Monitoring
-To accurately read the 3.7V LiPo battery (which peaks at 4.2V, exceeding the ESP32's safe limits), I implemented a hardware voltage divider. It steps the voltage down by half before reaching the ADC, allowing software to accurately calculate the remaining battery percentage without hardware damage.
-
-## State-Machine Architecture
-The CircuitPython firmware is built on a memory-efficient Finite State Machine (FSM), cleanly separating the standalone logic (Clock/Timer) from the docked logic (Tamagotchi/Stats) to prevent memory fragmentation and ensure smooth sprite animations.
-
-### Hardware & Tools
-
-- MCU & UI: Seeed Studio XIAO ESP32-C3, 1.28" Round GC9A01 IPS Display
-- Sensors: MPU6050 (Orientation Detection), External RTC Module
-- Power & Connectivity: 3.7V LiPo Battery, Magnetic Pogo Pins
-- Electronics: Custom KiCad PCB (Cube Mainboard), Custom Perfboard (Dock Circuitry)
 
 ## Gallery
 
